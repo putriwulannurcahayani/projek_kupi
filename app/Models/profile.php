@@ -12,5 +12,8 @@ class profile extends Model
         'nama',
         'nama_usaha',
         'email',
+        'alamat',
+        'no_telepon',
+        'role'
     ];
 }

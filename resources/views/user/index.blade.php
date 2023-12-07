@@ -26,7 +26,8 @@
         background-color: #f4f4f4;
         color: black;
         /* margin: 20px; */
-        text-align: center;
+        /* text-align: center;   */
+        /* font-size: 10px; */
         }
         .message {
         gap: 5px;
@@ -56,12 +57,16 @@
         position: relative;
         top: 70px;
         z-index: 1;
+       
         }
         .dpicn {
         height: 40px;
         }     
-
+        label{
+            font-size: 1rem;
+        }
         form {
+
             max-width: 400px;
             margin: 0 auto;
             background-color: #fff;
@@ -89,9 +94,10 @@
         border-left: 5px solid #1093B5;
         color: black;
         cursor: pointer;
+
         }
 
-        button {
+        .tombol {
             padding: 8px;
             border: none;
             border-radius: 3px;
@@ -148,25 +154,28 @@
 			<nav class="nav">
 				<div class="nav-upper-options">
                     <a href="/dashboard">
-                        <div class="option3 nav-option">
-                            <h3> Dashboard</h3>
+						<div class="nav-option option4">
+							
+							<h3> Dashboard</h3>
+						</div>
+					
+					</a>
+                    <a href="/produks">
+                        <div class="nav-option option4">
+                            <h3> Produk</h3>
                         </div>
                     </a>
+					
 
-                    <div class="nav-option option2">
-						
+					<div class="nav-option option4x">
 						<h3> Pendapatan </h3>
 					</div>	
 					
+					
+					@if (auth()->user()->role->nama_role == 'admin')
 					<div class="nav-option option3">
 						<h3> Beban </h3>
 					</div>
-
-					<a href="/produks">
-					    <div class="option3 nav-option">
-						    <h3> Produk</h3>
-					    </div>
-                    </a>
 
 					<div class="nav-option option5">
 						
@@ -183,19 +192,20 @@
 						<h3> Riwayat</h3>
 					</div>
 
-                    <a href="{{route('tambah-pegawai')}}" class="tambah">
+				<a href="{{route('tambah-pegawai')}}" class="tambah">
 						<div class="nav-option option8">
 							
 							<h3> Tambah Pegawai</h3>
 						</div>
 					</a>
-                    
-                    <a herf="{{route('logout')}}" method="POST">
-                        <div class="nav-option logout">
-                                @csrf
-                            <button type="submit">Logout</button>
-                        </div>
-                    </a>    
+					@endif
+                 
+                    <div class="nav-option">
+						<form action="{{route('logout')}}" method="POST" style="background-color: transparent; box-shadow: none; width: 100%;">
+							@csrf
+						<button type="submit">Logout</button>
+					</form>  
+                    </div>
 
 				</div>
 			</nav>
@@ -209,12 +219,37 @@
                     <form action="{{route('editProfile')}}" method="POST">
                         @method('put')
                         @csrf
-                        <input type="text" value="{{ $nama }}" placeholder="Nama" name="nama">
-                        <input type="text" value="{{ $namaUsaha }}" placeholder="Nama Usaha" name="nama_usaha">
-                        <input type="text" value="{{ $email }}" placeholder="Email" name="email">
-                        <button type="submit">Edit</button>
+                
+                        <label for="nama">Nama:</label>
+                        <input type="text" id="nama" value="{{ $nama }}" placeholder="Nama" name="nama">
+                
+                        <label for="nama_usaha">Nama Usaha:</label>
+                        <input type="text" id="nama_usaha" value="{{ $namaUsaha }}" placeholder="Nama Usaha" name="nama_usaha">
+                
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" value="{{ $email }}" placeholder="Email" name="email">
+                
+                        <label for="alamat">Alamat:</label>
+                        <input type="text" id="alamat" value="{{ $alamat }}" placeholder="Alamat" name="alamat">
+                
+                        <label for="no_telepon">No Telepon:</label>
+                        <input type="text" id="no_telepon" value="{{ $noTelepon }}" placeholder="No Telepon" name="no_telepon">
+                
+                         <!-- Existing form fields -->
+
+                        <label for="old_password">Old Password:</label>
+                        <input type="password" id="old_password" placeholder="Old Password" name="old_password">
+
+                        <label for="new_password">New Password:</label>
+                        <input type="password" id="new_password" placeholder="New Password" name="new_password">
+
+                        <label for="role">Role:</label>
+                        <input type="text" id="role" value="{{ $role }}" placeholder="Role"  readonly>
+                
+                        <button type="submit" class="tombol">Edit</button>
                     </form>
                 </div>
+                
             </div>
         </div>
 

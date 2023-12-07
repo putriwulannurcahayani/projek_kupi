@@ -468,6 +468,9 @@ border-radius: 4px;
         <div>
             <label for="stok">Stok:</label>
             <input type="number" id="stok" name="stok" value="{{ $produk->stok }}" required>
+            @error('stok')
+        <span style="color: crimson; margin-top: 10px; display: block;" class="error">{{ $message }}</span>
+    @enderror
         </div>
 
         <div>

@@ -19,6 +19,8 @@ public function register(Request $request)
 {
     $validate = $request->validate([
         "nama" => "required",
+        "alamat" => "required",
+        "no_telepon" => "required",
         "email" => "required|email|unique:users",
         "password" => "required",
     ]);

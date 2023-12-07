@@ -37,7 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get("/tambah-pegawai",[signupController::class,'index'])->name('tambah-pegawai');
     Route::post("/tambah-pegawai",[signupController::class,'register'])->name('tambah-pegawai.store');
     Route::put('/edit-profile', [ProfileController::class,'update'])->name('editProfile');
+    Route::get('/produks/cetak',[ProdukController::class, 'cetak'])->name('produks.cetak');
 
+    Route::get('/produks/laporan',[ProdukController::class, 'laporan'])->name('produks.laporan');
     Route::get('/produks/create', 'ProdukController@create')->name('produks.create');
     Route::get('/produks', [ProdukController::class, 'index'])->name('produks.index');
     Route::get('/produks/{id}', [ProdukController::class, 'show'])->name('produks.show');
@@ -48,6 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
 });
+
+
+
 
 
 

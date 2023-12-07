@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             "nama" => 'admin',
             "nama_usaha" => 'kue kering',
             "email" => 'admin@gmail.com',
+            "alamat" =>'JL. Mawar No.10',
+            "no_telepon" =>'081234567890',
             "password" =>'admin123',
         ]);
 
@@ -44,6 +46,8 @@ class DatabaseSeeder extends Seeder
             "nama" => 'pegawai',
             "nama_usaha" => 'kue kering',
             "email" => 'pegawai@gmail.com',
+            "alamat" =>'JL. Melati No.10',
+            "no_telepon" =>'081999999999',
             "password" =>'pegawai123',
         ]);
     }

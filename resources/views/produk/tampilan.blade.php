@@ -1,5 +1,90 @@
-/* Main CSS Here */
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Produk</title>
+    <link rel="stylesheet" href="editproduk.css">
+</head> 
+    <style>
+     body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 20px;
+    width: 95%;
+}
+
+form label {
+    color: #337ab7;
+    margin-bottom: 5px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus {
+    border-color: #337ab7;
+}
+
+form button {
+    padding: 12px 24px;
+    background-color: #337ab7;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #286090;
+}
+
+form a button {
+    padding: 12px 24px;
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form a button:hover {
+    background-color: #bbb;
+}
 @import url(
 "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -22,17 +107,20 @@ font-family:  'Battambang', Regular;
 }
 body {
 background-color: var(--background-color4);
+margin-top: 70px;
 max-width: 100%;
 overflow-x: hidden;
 }
 
 header {
 height: 70px;
-width: 100vw;
+width: 100%;
 padding: 0 30px;
 background-color: var(--background-color1);
 position: fixed;
-z-index: 100;
+top: 0;
+left: 0;
+z-index: 1000;
 box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
 display: flex;
 justify-content: space-between;
@@ -44,10 +132,10 @@ font-size: 27px;
 font-weight: 600;
 color: rgb(239, 245, 241);
 }
+
 .img {
 	height: 50px;
 }
-
 .icn {
 height: 50px;
 }
@@ -114,7 +202,6 @@ align-items: center;
 justify-content: center;
 overflow: hidden;
 }
-
 .main-container {
 display: flex;
 width: 100vw;
@@ -122,12 +209,12 @@ position: relative;
 top: 70px;
 z-index: 1;
 }
-
 .dpicn {
 height: 40px;
 }
 
 .main {
+padding-top: 30px;
 height: calc(100vh - 70px);
 width: 100%;
 overflow-y: scroll;
@@ -145,11 +232,7 @@ width: 5px;
 .main::-webkit-scrollbar-track {
 background-color: #9e9e9eb2;
 }
-.box-container > .container{
-    background-color: #ffffff;
-    padding: 16px 16px;
-    border-radius: 16px;
-}
+
 .box-container {
 display: flex;
 justify-content: space-evenly;
@@ -210,13 +293,13 @@ align-items: center;
 gap: 30px;
 }
 
-.option4 {
+.option1 {
 border-left: 5px solid #1093B5;
 background-color: var(--Border-color);
 color: white;
 cursor: pointer;
 }
-.option4:hover {
+.option1:hover {
 border-left: 5px solid #00580caf;
 background-color: var(--Border-color);
 }
@@ -341,33 +424,81 @@ color: white;
 border-radius: 4px;
 }
 
-.tanggal{
-	display: flex;
-	justify-content: end;
-	width: 100%;
+/* Main CSS Here */
+
+/* ... (Your existing styles) ... */
+
+/* Additional styles for the table */
+table {
+    width: 80%;
+    margin: 20px auto; /* Menempatkan tabel di tengah */
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan untuk memberikan kedalaman */
 }
 
-
-
-.nav-option.option1 > a{
-    color: #000;
-    text-decoration: none;
-}
-Link styling
-/* Gaya umum untuk tombol aksi */
-.action-container > a {
-    width: 120px;
-    text-align: center;
-    margin: 10px auto; 
-    padding: 10px;
-    color: white;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
+th, td {
+    padding: 25px 100px;
+    border: 1px solid #dee2e6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Gaya tambahan untuk tombol "Tambah" */
-.tambah-button {
+thead {
+    background-color: #3498db;
+    color: #fff;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+tbody td {
+    color: #333;
+}
+
+/* Optional: Add styling for alternating rows */
+tbody tr:nth-child(even) {
+    background-color: #ecf0f1;
+}
+.box-container > .container{
+    background-color: #ffffff;
+    padding: 25px 25px;
+    border-radius: 16px;
+}
+.box-container {
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+flex-wrap: wrap;
+gap: 50px;
+}
+.nav {
+min-height: 91vh;
+width: 250px;
+background-color: var(--background-color2);
+position: absolute;
+top: 0px;
+left: 00;
+box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+overflow: hidden;
+padding: 30px 0 20px 10px;
+}
+.navcontainer {
+height: calc(100vh - 70px);
+width: 250px;
+position: relative;
+overflow-y: scroll;
+overflow-x: hidden;
+transition: all 0.5s ease-in-out;
+}
+.navcontainer::-webkit-scrollbar {
+display: none;
+}
+.cetak-button {
     /* display: block; */
     margin-top: 20px;
     margin-right: 10px;
@@ -380,130 +511,70 @@ Link styling
     background-color: #007bff; 
 
 }
-.tambah-button:hover {
+.cetak-button:hover {
     opacity: 0.7;
 }
 
-/* Table styling */
-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
+.tanggal{
+	display: flex;
+	justify-content: end;
+	width: 100%;
 }
 
-th, td {
-    padding: 12px;
-    border: 1px solid #dee2e6;
-    white-space: nowrap; /* Agar teks tidak memotong dan tetap dalam satu baris */
-    text-overflow: ellipsis; /* Jika teks terlalu panjang, tampilkan elipsis (...) */
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-/* Responsifkan tabel untuk layar kecil */
-@media (max-width: 600px) {
-    table {
-        overflow-x: auto;
-        display: block;
-    }
-
-    th, td {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
+    </style>
+<body>
+    <header>
+        <div class="logosec">
+            <div class="logo">Keuangan Pintar</div>
+            <i class="fas fa-bars icn menuicn" id="menuicn" ></i>
+            <img src="{{asset('images/imageslogokupi.png')}}" class="img" alt="" >
+        </div>
     
-}
+        <div class="message">
+        <a href="{{route('profile')}}">
+            <div class="circle"></div>
+            <img src="{{asset('images/profile.png')}}"class="icn" alt="">
+        </a>
+        <div class="dp">
+            <img src="{{asset('images/notifikasi.png')}}" class="dpicn" alt="">
+        </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="tanggal">
+            <p id="tanggal"></p>
+        </div>
+        <div class="box-container">
+            <div class="container">
 
-/* Button styling */
-button {
-    padding: 8px;
-    border: none;
-    border-radius: 3px;
-    background-color: #dc3545;
-    color: white;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
+                <h1>Daftar Produk</h1>
+                <div style="margin-top: 50px">
+                    <a href="{{ route('produks.cetak') }}" class="cetak-button" style="margin-top: 10px">Cetak </a>
+                </div>
+        <table>
+            <thead>
+                <tr>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>kelemben</td>
+                                <td>$20.00</td>
+                                <td>50</td>
+                            </tr>
+                            <tr>
+                                <td>bagiak</td>
+                                <td>$30.00</td>
+                                <td>30</td>
+                            
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                     </table>
 
-button:hover {
-    opacity: 0.7;
-}
-
-/* Nav-menu styling */
-.nav-menu {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-menu li a {
-    color: white;
-    font-size: 18px;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-.nav-menu li a:hover {
-    background-color: #45a049;
-}
-
-/* Additional styles for button alignment */
-td button {
-    display: inline-block;
-    margin: 0;
-    padding: 8px;
-    border-radius: 3px;
-    color: #fff;
-    background-color: #dc3545;
-    transition: opacity 0.3s ease;
-}
-
-td button:hover {
-    opacity: 0.7;
-}
-
-/* Content styling */
-.content {
-    margin-top: 70px;
-    padding: 30px;
-}
-/* Tambahkan CSS ini ke bagian CSS Anda */
-
-/* Gaya untuk tombol Edit dan Hapus */
-.action-buttons {
-    display: flex;
-    align-items: center;
-}
-
-.edit-button,
-.delete-button {
-    margin-right: 10px;
-    padding: 8px;
-    text-decoration: none;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.edit-button {
-    background-color: #007bff;
-}
-
-.delete-button {
-    background-color: #dc3545;
-}
-
-.edit-button:hover,
-.delete-button:hover {
-    opacity: 0.7;
-}
-
-a{
-    text-decoration: none;
-    color: black;
-}
+    <!-- ... (Your existing HTML) ... -->
+</body>
+</html>

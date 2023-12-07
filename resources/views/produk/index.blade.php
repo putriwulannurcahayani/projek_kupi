@@ -176,23 +176,26 @@
 			<nav class="nav">
 				<div class="nav-upper-options">
 					<a href="/dashboard">
-					<div class="nav-option option1">
-                            <h3> Dashboard</h3>
+						<div class="nav-option option1">
 							
+							<h3> Dashboard</h3>
 						</div>
+					
 					</a>
+
+					<div class="nav-option option4" onclick="redirectToProduk()">
+						<h3> Produk</h3>
+					</div>
 
 					<div class="nav-option option2">
 						
 						<h3> Pendapatan </h3>
 					</div>	
 					
+					
+					@if (auth()->user()->role->nama_role == 'admin')
 					<div class="nav-option option3">
 						<h3> Beban </h3>
-					</div>
-
-					<div class="nav-option option4" onclick="redirectToProduk()">
-						<h3> Produk</h3>
 					</div>
 
 					<div class="nav-option option5">
@@ -210,11 +213,14 @@
 						<h3> Riwayat</h3>
 					</div>
 
-					<div class="nav-option option8">
-						
-						<h3> Tambah Pegawai</h3>
-					</div>
-
+				<a href="{{route('tambah-pegawai')}}" class="tambah">
+						<div class="nav-option option8">
+							
+							<h3> Tambah Pegawai</h3>
+						</div>
+					</a>
+					@endif
+					
 					<div class="nav-option logout">
 						<form action="{{route('logout')}}" method="POST">
 							@csrf
@@ -235,6 +241,7 @@
                     <h1>Daftar Produk</h1>
 					<div style="margin-top: 50px">
 						<a href="{{ route('produks.create') }}" class="tambah-button" style="margin-top: 10px">Tambah + </a>
+						<a href="{{ route('produks.laporan') }}" class="tambah-button" style="margin-top: 10px">Lihat Laporan </a>
 					</div>
                     <div class="action-container">
                     </div>

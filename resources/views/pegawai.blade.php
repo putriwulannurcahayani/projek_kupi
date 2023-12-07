@@ -216,6 +216,18 @@
                     @enderror
                 </div>
                 <div class="input-box">
+                    <input type="alamat" placeholder="Alamat" required name="alamat">
+                    @error('alamat')
+                    <p class="text-red">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="input-box">
+                    <input type="noTelepon" placeholder="No Telepon" required name="no_telepon">
+                    @error('no_telepon')
+                    <p class="text-red">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="input-box">
                     <input type="password" placeholder="Password" required name="password">
                     @error('password')
                     <p class="text-red">{{ $message }}</p>

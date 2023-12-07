@@ -19,6 +19,19 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id); // Mengambil produk berdasarkan ID
         return view('produks.show', compact('produk')); // Menampilkan detail produk ke dalam view
+        // return view('produk.tampilan', compact('produk'));
+    }
+
+    public function laporan(){
+        // dd("tes");
+         $produks = Produk::all(); 
+        return view('produk.tampilan',compact('produks'));
+    }
+
+    public function cetak(){
+        // dd("tes");
+         $produks = Produk::all(); 
+        return view('produk.cetak',compact('produks'));
     }
 
     public function createproduk()
@@ -34,7 +47,7 @@ class ProdukController extends Controller
             'kode_produk' => 'required',
             'nama_produk' => 'required',
             'harga' => 'required|numeric',
-            'stok' => 'required|numeric'
+            'stok' => 'required|numeric|min:1'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
 
@@ -54,12 +67,12 @@ class ProdukController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         // Validasi data yang diterima dari formulir
-        // $validatedData = $request->validate([
-        //     'nama_produk' => 'required',
-        //     'harga' => 'required|numeric',
-        //     'stok' => 'required|numeric'
-        //     // Sesuaikan validasi dengan kebutuhan Anda
-        // ]);
+        $validatedData = $request->validate([
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric|min:0'
+            // Sesuaikan validasi dengan kebutuhan Anda
+        ]);
 
         // Perbarui data produk yang ada di dalam database
         $produk = Produk::findOrFail($id);

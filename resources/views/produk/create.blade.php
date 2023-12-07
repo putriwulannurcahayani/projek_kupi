@@ -432,6 +432,10 @@ button:hover {
 .img {
 	height: 50px;
 }
+
+span{
+    color: crimson;
+}
 </style>
 </head>
 	<!-- for header part -->
@@ -460,16 +464,32 @@ button:hover {
         @csrf
 
         <label for="kode_produk">Kode Produk:</label><br>
-        <input type="text" id="kode_produk" name="kode_produk" required><br><br>
+        <input type="text" id="kode_produk" name="kode_produk" required>
+        @error('kode_produk')
+        <span class="error">{{ $message }}</span>
+        @enderror
+        <br><br>
 
         <label for="nama_produk">Nama Produk:</label><br>
-        <input type="text" id="nama_produk" name="nama_produk" required><br><br>
+        <input type="text" id="nama_produk" name="nama_produk" required>
+        @error('nama_produk')
+        <span class="error">{{ $message }}</span>
+    @enderror
+        <br><br>
 
         <label for="harga">Harga:</label><br>
-        <input type="number" id="harga" name="harga" required><br><br>
+        <input type="number" id="harga" name="harga" required>
+        @error('harga')
+        <span class="error">{{ $message }}</span>
+    @enderror
+        <br><br>
 
         <label for="stok">Stok:</label><br>
-        <input type="number" id="stok" name="stok" required><br><br>
+        <input type="number" id="stok" name="stok" required>
+        @error('stok')
+        <span class="error">{{ $message }}</span>
+    @enderror
+        <br><br>
 
         <button type="submit">Tambah Produk</button>
         <a href="{{ route('produks.index') }}" class="batal-button">Batal </a>

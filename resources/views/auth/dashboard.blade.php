@@ -46,22 +46,27 @@
 		<div class="navcontainer">
 			<nav class="nav">
 				<div class="nav-upper-options">
-					<div class="nav-option option1">
-						
-						<h3> Dashboard</h3>
+					<a href="/dashboard">
+						<div class="nav-option option1">
+							
+							<h3> Dashboard</h3>
+						</div>
+					
+					</a>
+
+					<div class="nav-option option4" onclick="redirectToProduk()">
+						<h3> Produk</h3>
 					</div>
 
-					<div class="nav-option option2">
+					<div class="nav-option option2" onclick="redirectToProduk()">
 						
 						<h3> Pendapatan </h3>
 					</div>	
 					
+					
+					@if (auth()->user()->role->nama_role == 'admin')
 					<div class="nav-option option3">
 						<h3> Beban </h3>
-					</div>
-
-					<div class="nav-option option4" onclick="redirectToProduk()">
-						<h3> Produk</h3>
 					</div>
 
 					<div class="nav-option option5">
@@ -85,7 +90,8 @@
 							<h3> Tambah Pegawai</h3>
 						</div>
 					</a>
-
+					@endif
+					
 					<div class="nav-option logout">
 						<form action="{{route('logout')}}" method="POST">
 							@csrf
