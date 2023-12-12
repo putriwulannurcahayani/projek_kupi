@@ -17,6 +17,6 @@ class Produk extends Model
     // Contoh relasi dengan model lain
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Pendapatan::class);
     }
 }

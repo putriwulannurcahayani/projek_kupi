@@ -1,3 +1,21 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "Kupi";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM produks";
+$result = $conn->query($sql);
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -520,6 +538,21 @@ display: none;
 	justify-content: end;
 	width: 100%;
 }
+.batal-button {
+    margin-left: 405px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: blue; 
+    
+
+}
+.batal-button:hover {
+    opacity: 0.7;
+}
 
     </style>
 <body>
@@ -549,7 +582,6 @@ display: none;
 
                 <h1>Daftar Produk</h1>
                 <div style="margin-top: 50px">
-                    <a href="{{ route('produks.cetak') }}" class="cetak-button" style="margin-top: 10px">Cetak </a>
                 </div>
         <table>
             <thead>
@@ -560,21 +592,20 @@ display: none;
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>kelemben</td>
-                                <td>$20.00</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>bagiak</td>
-                                <td>$30.00</td>
-                                <td>30</td>
-                            
-                            </tr>
+                        <?php
+                            // Loop through the retrieved product data and display it in the table
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["nama_produk"] . "</td>";
+                                echo "<td>" . $row["harga"] . "</td>";
+                                echo "<td>" . $row["stok"] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
                             <!-- Add more rows as needed -->
                         </tbody>
                      </table>
-
+                     <a href="{{ route('produks.index') }}" class="batal-button">Kembali </a>
     <!-- ... (Your existing HTML) ... -->
 </body>
 </html>

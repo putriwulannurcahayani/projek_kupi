@@ -187,16 +187,18 @@
 						<h3> Produk</h3>
 					</div>
 
-					<div class="nav-option option2">
-						
-						<h3> Pendapatan </h3>
-					</div>	
-					
+					<a href="/pendapatans">
+						<div class="nav-option option2">
+							<h3> Pendapatan </h3>
+						</div>	
+					</a>
 					
 					@if (auth()->user()->role->nama_role == 'admin')
+					<a href="/beban">
 					<div class="nav-option option3">
 						<h3> Beban </h3>
 					</div>
+					</a>
 
 					<div class="nav-option option5">
 						

@@ -190,10 +190,10 @@ gap: 20px;
 transition: all 0.1s ease-in-out;
 }
 .nav-option:hover {
-border-left: 5px solid #a2a2a2;
-background-color: #dadada;
-cursor: pointer;
-}
+    border-left: 5px solid #a2a2a2;
+    background-color: #dadada;
+    cursor: pointer;
+    }
 .nav-img {
 height: 30px;
 }
@@ -359,4 +359,10 @@ border-radius: 4px;
 .tambah{
     text-decoration: none;
     color: black ;
+}
+
+a {
+    background-color: none;
+    color: black;
+    text-decoration: none;
 }

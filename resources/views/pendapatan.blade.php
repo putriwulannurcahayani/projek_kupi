@@ -145,17 +145,15 @@
                             <h3> Dashboard</h3>
                         </div>
                     </a>
-
-                    <div class="nav-option option4" onclick="redirectToProduk()">
+                    <div class="nav-option option2" onclick="redirectToProduk()">
                         <h3> Produk</h3>
                     </div>
 
-                    <a href="/pendapatans">
-                        <div class="nav-option option2">
-                            <h3> Pendapatan </h3>
-                        </div>
-                    </a>
+                    <div class="nav-option option1">
+                        <h3> Pendapatan </h3>
+                    </div>
 
+                    @if (auth()->user()->role->nama_role == 'admin')
                     <a href="/beban">
                     <div class="nav-option option3">
                         <h3> Beban </h3>
@@ -174,9 +172,12 @@
                         <h3> Riwayat</h3>
                     </div>
 
-                    <div class="nav-option option1">
-                        <h3> Tambah Pegawai</h3>
-                    </div>
+                    <a href="{{route('tambah-pegawai')}}" class="tambah">
+						<div class="nav-option option4">
+							<h3> Tambah Pegawai</h3>
+						</div>
+					</a>
+                    @endif
 
                     <div class="nav-option logout">
                         <form action="{{route('logout')}}" method="POST">
@@ -188,9 +189,9 @@
             </nav>
         </div>
         <div class="wrapper">
-            <form action="{{ route('tambah-pegawai.store') }}" class="signup-form" method="POST">
+            <form action="{{ route('pendapatan.store') }}" class="signup-form" method="POST">
                 @csrf
-                <h2 style="padding: 15px; font-size: 1.5rem;">Tambah Pegawai</h2>
+                <h2 style="padding: 15px; font-size: 1.5rem;">Tambah Transaksi</h2>
                     @if (session()->has('successAddSekolah'))
                     <div class="toast-wrapper">
                         <div class="toast-succes">
@@ -200,7 +201,7 @@
                              </div>
                              <div class="content">
                                  <h1>Succes</h1>
-                                 <p>Akun Berhasil Dibuat</p>
+                                 <p>Transaksi Baru Berhasil Ditambahkan</p>
                              </div>
                          </div>
                         </div>
@@ -208,37 +209,31 @@
     
                     @endif
                 <div class="input-box">
-                    <input type="text" placeholder="Nama" required name="nama" value="{{ old('nama') }}">
-                    @error('nama')
+                    <input type="tanggal" placeholder="Tanggal" required name="tanggal" value="{{ old('tanggal') }}">
+                    @error('tanggal')
                     <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Email" required name="email" value="{{ old('email') }}">
-                    @error('email')
+                    <input type="produk" placeholder="Produk" required name="produk" value="{{ old('produk') }}">
+                    @error('produk')
                     <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="input-box">
-                    <input type="alamat" placeholder="Alamat" required name="alamat">
-                    @error('alamat')
+                    <input type="jumlahProduk" placeholder="Jumlah Produk" required name="jumlah_produk">
+                    @error('jumlah_produk')
                     <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="input-box">
-                    <input type="noTelepon" placeholder="No Telepon" required name="no_telepon">
-                    @error('no_telepon')
-                    <p class="text-red">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="Password" required name="password">
-                    @error('password')
+                    <input type="total" placeholder="Total" required name="total">
+                    @error('total')
                     <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="input-box button">
-                    <input type="submit" value="Create an Account">
+                    <input type="submit" value="Tambah Transaksi">
                 </div>
             </form>
         </div>

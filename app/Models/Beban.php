@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pendapatan extends Model
+class Beban extends Model
 {
-    protected $table = 'pendapatans';
+    protected $table = 'bebans';
 
     protected $fillable = [
-        'tanggal', 'produk', 'jumlah_produk', 'total'
+        'tanggal', 'nama','kategori', 'jumlah', 'total_biaya',
         // Kolom lain yang ingin diisi secara massal
     ];
+
+    // Contoh relasi dengan model lain
     public function orders()
     {
-        return $this->hasMany(Produk::class);
+        return $this->hasMany(Order::class);
     }
 }

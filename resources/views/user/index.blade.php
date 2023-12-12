@@ -166,16 +166,19 @@
                         </div>
                     </a>
 					
-
-					<div class="nav-option option4x">
-						<h3> Pendapatan </h3>
-					</div>	
+                    <a href="/pendapatans">
+					    <div class="nav-option option4x">
+						    <h3> Pendapatan </h3>
+					    </div>
+                    </a>	
 					
 					
 					@if (auth()->user()->role->nama_role == 'admin')
-					<div class="nav-option option3">
+					<a href="/beban">
+                    <div class="nav-option option3">
 						<h3> Beban </h3>
 					</div>
+                    </a>
 
 					<div class="nav-option option5">
 						

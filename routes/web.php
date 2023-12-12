@@ -6,6 +6,8 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PendapatanController;
+use App\Http\Controllers\BebanController;
 
 
 /*
@@ -21,7 +23,8 @@ use App\Http\Controllers\ProdukController;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [loginController::class, 'index'])->name('viewLogin');
@@ -49,6 +52,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/produks/store', [ProdukController::class, 'store'])->name('produks.store');
     Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
+
+    Route::get('/pendapatans', [PendapatanController::class, 'index'])->name('pendapatans');
+    Route::post('/pendapatan/store', [PendapatanController::class, 'store'])->name('pendapatan.store');
+
+    Route::get('/beban', [BebanController::class, 'index'])->name('beban.index');
+    Route::get('/beban/{id}', [BebanController::class, 'show'])->name('beban.show');
+    Route::get('/beban/create', [BebanController::class, 'createbeban'])->name('beban.create');
+    Route::post('/beban/store', [BebanController::class, 'store'])->name('beban.store');
+    Route::get('/beban/tampilan',[ProdukController::class, 'tampilan'])->name('beban.tampilan');
 });
 
 
