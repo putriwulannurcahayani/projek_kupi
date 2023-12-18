@@ -8,6 +8,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\BebanController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LabaRugiController;
+use App\Http\Controllers\RiwayatController;
 
 
 /*
@@ -41,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::post("/tambah-pegawai",[signupController::class,'register'])->name('tambah-pegawai.store');
     Route::put('/edit-profile', [ProfileController::class,'update'])->name('editProfile');
     Route::get('/produks/cetak',[ProdukController::class, 'cetak'])->name('produks.cetak');
+    Route::get('/profileedit', [ProfileController::class,'profile'])->name('profileedit');
 
     Route::get('/produks/laporan',[ProdukController::class, 'laporan'])->name('produks.laporan');
     Route::get('/produks/create', 'ProdukController@create')->name('produks.create');
@@ -60,7 +64,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/beban/{id}', [BebanController::class, 'show'])->name('beban.show');
     Route::get('/beban/create', [BebanController::class, 'createbeban'])->name('beban.create');
     Route::post('/beban/store', [BebanController::class, 'store'])->name('beban.store');
-    Route::get('/beban/tampilan',[ProdukController::class, 'tampilan'])->name('beban.tampilan');
+    Route::resource('/kategori',KategoriController::class);
+
+    Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat');
+
+    Route::get('/labarugi', [LabaRugiController::class, 'hitungLabaRugi'])->name('labarugi.index');
 });
 
 

@@ -14,15 +14,16 @@
     <style>
         .wrapper {
             flex: 2;
-            background-color: #fff;
-            padding: 20px;
+            /* background-color: #fff; */
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+      
 
         .signup-form {
             max-width: 400px;
-            margin: 0 auto;
+            margin:  auto;
         }
 
         h2 {
@@ -43,7 +44,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 3px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
@@ -105,6 +106,14 @@
             justify-content: center;
             align-items: center;
         }
+     
+
+.nav-upper-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+
     </style>
 
     <!-- Add Font Awesome CDN for icons -->
@@ -155,24 +164,29 @@
                             <h3> Pendapatan </h3>
                         </div>
                     </a>
-
+                   
                     <a href="/beban">
                     <div class="nav-option option3">
                         <h3> Beban </h3>
                     </div>
                     </a>
 
-                    <div class="nav-option option5">
-                        <h3> Laba Rugi</h3>
-                    </div>
-
-                    <div class="nav-option option6">
-                        <h3> Arus Kas</h3>
-                    </div>
-
-                    <div class="nav-option option7">
-                        <h3> Riwayat</h3>
-                    </div>
+                    <a href="/labarugi">
+                        <div class="nav-option option5">
+                            <h3> Laba Rugi</h3>
+                        </div>
+                        </a>
+    
+                        <div class="nav-option option6">
+                            <h3> Arus Kas</h3>
+                        </div>
+    
+                        <a href="/riwayat">
+                            <div class="nav-option option6">
+                                
+                                <h3> Riwayat</h3>
+                            </div>
+                        </a>
 
                     <div class="nav-option option1">
                         <h3> Tambah Pegawai</h3>

@@ -9,6 +9,7 @@
 		content="width=device-width, 
 				initial-scale=1.0">
 	<title>Aplikasi KUPI</title>
+	
 	<link rel="stylesheet"
 		href="dashboard.css">
 	<link rel="stylesheet"
@@ -72,21 +73,22 @@
 					</div>
 					</a>
 
+					<a href="/labarugi">
 					<div class="nav-option option5">
-						
 						<h3> Laba Rugi</h3>
 					</div>
+					</a>
 
 					<div class="nav-option option6">
 						
 						<h3> Arus Kas</h3>
 					</div>
-
+				<a href="/riwayat">
 					<div class="nav-option option7">
 						
 						<h3> Riwayat</h3>
 					</div>
-
+				</a>
 					<a href="{{route('tambah-pegawai')}}" class="tambah">
 						<div class="nav-option option8">
 							<h3> Tambah Pegawai</h3>
@@ -109,9 +111,9 @@
 			<div class="tanggal">
 				<p id="tanggal"></p>
 			</div>
-			<div class="">
-				<h1>Selamat Datang {{ strtoupper(auth()->user()->role->nama_role) }}
-				</h1>
+			<div class="b">
+				<h6>Selamat Datang {{ strtoupper(auth()->user()->role->nama_role) }}
+				</h6>
 			</div>
 			
 		</div>

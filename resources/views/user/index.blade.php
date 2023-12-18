@@ -9,115 +9,68 @@
 		content="width=device-width, 
 				initial-scale=1.0">
 	<title>Aplikasi KUPI</title>
+    
 	<link rel="stylesheet"
 		href="dashboard.css">
 	<link rel="stylesheet"
 		href="responsive.css">
-        <style>
+<style>
+    
 
-           html,*,body{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-           }
-        
-        body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f4f4f4;
-        color: black;
-        /* margin: 20px; */
-        /* text-align: center;   */
-        /* font-size: 10px; */
-        }
-        .message {
-        gap: 5px;
-        position: relative;
-        cursor: pointer;
-        }
-        .circle {
-        height: 5px;
-        width: 5px;
-        position: absolute;
-        border-radius: 50%;
-        left: 19px;
-        top: 8px;
-        }
-        .dp {
-        height: 45px;
-        width: 45px;
-        border-radius: 40%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        }
-        .main-container {
-        display: flex;
-        width: 100vw;
-        position: relative;
-        top: 70px;
-        z-index: 1;
-       
-        }
-        .dpicn {
-        height: 40px;
-        }     
-        label{
-            font-size: 1rem;
-        }
-        form {
 
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
 
-        .option1 {
-        border-left: 5px solid #1093B5; 
-        color: black;
-        cursor: pointer;
-        }
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
 
-        .option2 {
-        border-left: 5px solid #1093B5;
-        color: black;
-        cursor: pointer;
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
 
-        }
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
 
-        .tombol {
-            padding: 8px;
-            border: none;
-            border-radius: 3px;
-            background-color: #dc3545;
-            color: white;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
 
-        button:hover {
-            opacity: 0.7;
-        }
-
-        a{
-            text-decoration: none;
-            color: black;
-        }
-        </style>
+h3{
+    font-size: 1.5rem;
+}
+</style>
 </head>
-
 <body>
 
 	<!-- for header part -->
@@ -167,7 +120,7 @@
                     </a>
 					
                     <a href="/pendapatans">
-					    <div class="nav-option option4x">
+					    <div class="nav-option option4">
 						    <h3> Pendapatan </h3>
 					    </div>
                     </a>	
@@ -180,10 +133,11 @@
 					</div>
                     </a>
 
+          <a href="/labarugi">
 					<div class="nav-option option5">
-						
 						<h3> Laba Rugi</h3>
 					</div>
+          </a>
 
 					<div class="nav-option option6">
 						
@@ -213,50 +167,75 @@
 				</div>
 			</nav>
 		</div>
-        <div class="main">
-            <div class="tanggal">
-                <p id="tanggal"></p>
-            </div>
-            <div class="profile-wrap">
-                <div class="profile">
-                    <form action="{{route('editProfile')}}" method="POST">
-                        @method('put')
-                        @csrf
-                
-                        <label for="nama">Nama:</label>
-                        <input type="text" id="nama" value="{{ $nama }}" placeholder="Nama" name="nama">
-                
-                        <label for="nama_usaha">Nama Usaha:</label>
-                        <input type="text" id="nama_usaha" value="{{ $namaUsaha }}" placeholder="Nama Usaha" name="nama_usaha">
-                
-                        <label for="email">Email:</label>
-                        <input type="text" id="email" value="{{ $email }}" placeholder="Email" name="email">
-                
-                        <label for="alamat">Alamat:</label>
-                        <input type="text" id="alamat" value="{{ $alamat }}" placeholder="Alamat" name="alamat">
-                
-                        <label for="no_telepon">No Telepon:</label>
-                        <input type="text" id="no_telepon" value="{{ $noTelepon }}" placeholder="No Telepon" name="no_telepon">
-                
-                         <!-- Existing form fields -->
-
-                        <label for="old_password">Old Password:</label>
-                        <input type="password" id="old_password" placeholder="Old Password" name="old_password">
-
-                        <label for="new_password">New Password:</label>
-                        <input type="password" id="new_password" placeholder="New Password" name="new_password">
-
-                        <label for="role">Role:</label>
-                        <input type="text" id="role" value="{{ $role }}" placeholder="Role"  readonly>
-                
-                        <button type="submit" class="tombol">Edit</button>
-                    </form>
+<body>
+<div class="container">
+    <div class="main-body">
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="images/profile.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>{{ $nama }}</h4>
+                      <p class="text-secondary mb-1">{{ $role }}</p>
+                    </div>
+                  </div>
                 </div>
-                
+              </div>
             </div>
-        </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Nama Usaha</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $namaUsaha }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $email }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">No Telepon</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $noTelepon }}
+                </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Alamat</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ $alamat }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-info" href="{{ route('profileedit') }}">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-	<script src="script.js"></script>
+        </div>
+    </div>
 </body>
 </html>
     

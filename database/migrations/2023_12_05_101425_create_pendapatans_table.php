@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('pendapatans', function (Blueprint $table) {
             $table->id();
             $table->string('tanggal');
-            $table->string('produk');
-            $table->String('jumlah_produk');
+            $table->unsignedBigInteger('id_produk');
+            $table->string('jumlah_produk');
             $table->integer('total');
             $table->timestamps();
+    
+            // Define foreign key constraint
+            $table->foreign('id_produk')->references('id')->on('produks')->onDelete('cascade');
         });
     }
+    
 
     /**
      * Reverse the migrations.

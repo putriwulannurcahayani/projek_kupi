@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\KurangiStokProduk;
 
 class Pendapatan extends Model
 {
     protected $table = 'pendapatans';
 
-    protected $fillable = [
-        'tanggal', 'produk', 'jumlah_produk', 'total'
-        // Kolom lain yang ingin diisi secara massal
-    ];
+    protected $guarded = ['id'];
     public function orders()
     {
-        return $this->hasMany(Produk::class);
+        // return $this->hasMany(Produk::class);
+        return $this->belongsTo(Produk::class);
     }
 }

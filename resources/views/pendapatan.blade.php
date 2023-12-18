@@ -14,7 +14,7 @@
     <style>
         .wrapper {
             flex: 2;
-            background-color: #fff;
+            /* background-color: #fff; */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -105,6 +105,9 @@
             justify-content: center;
             align-items: center;
         }
+        .nav-upper-options{
+            padding: ;
+        }
     </style>
 
     <!-- Add Font Awesome CDN for icons -->
@@ -160,17 +163,22 @@
                     </div>
                     </a>
 
+                    <a href="/labarugi">
                     <div class="nav-option option5">
                         <h3> Laba Rugi</h3>
                     </div>
+                    </a>
 
                     <div class="nav-option option6">
                         <h3> Arus Kas</h3>
                     </div>
 
-                    <div class="nav-option option7">
-                        <h3> Riwayat</h3>
-                    </div>
+                    <a href="/riwayat">
+                        <div class="nav-option option1">
+                            
+                            <h3> Riwayat</h3>
+                        </div>
+                    </a>
 
                     <a href="{{route('tambah-pegawai')}}" class="tambah">
 						<div class="nav-option option4">
@@ -191,7 +199,7 @@
         <div class="wrapper">
             <form action="{{ route('pendapatan.store') }}" class="signup-form" method="POST">
                 @csrf
-                <h2 style="padding: 15px; font-size: 1.5rem;">Tambah Transaksi</h2>
+                <h2 style="padding: 15px; font-size: 1.5rem;">Tambah Pendapatan</h2>
                     @if (session()->has('successAddSekolah'))
                     <div class="toast-wrapper">
                         <div class="toast-succes">
@@ -209,26 +217,30 @@
     
                     @endif
                 <div class="input-box">
-                    <input type="tanggal" placeholder="Tanggal" required name="tanggal" value="{{ old('tanggal') }}">
+                    <input type="date" placeholder="Tanggal" required name="tanggal" value="{{ old('tanggal') }}">
                     @error('tanggal')
                     <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="input-box">
-                    <input type="produk" placeholder="Produk" required name="produk" value="{{ old('produk') }}">
+                    <select name="id_produk" required>
+                        <option value="" disabled selected>Select a product</option>
+                        @foreach($products as $product)
+                        @if($product->stok > 0)
+                            <option value="{{ $product->id }}" {{ old('produk') == $product->id ? 'selected' : '' }}>
+                                {{ $product->nama_produk }}
+                            </option>
+                        @endif
+                        @endforeach
+                    </select>
                     @error('produk')
-                    <p class="text-red">{{ $message }}</p>
+                        <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
+
                 <div class="input-box">
                     <input type="jumlahProduk" placeholder="Jumlah Produk" required name="jumlah_produk">
                     @error('jumlah_produk')
-                    <p class="text-red">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="input-box">
-                    <input type="total" placeholder="Total" required name="total">
-                    @error('total')
                     <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>

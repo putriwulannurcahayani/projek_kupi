@@ -48,9 +48,9 @@ class BebanController extends Controller
         $validatedData = $request->validate([
             'tanggal' => 'required',
             'nama' => 'required',
-            'kategori' => 'required',
+            'id_kategori' => 'required',
             'jumlah' => 'required|numeric|min:1',
-            'total_biaya' => 'required|numeric'
+            'harga' => 'required|numeric'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
 

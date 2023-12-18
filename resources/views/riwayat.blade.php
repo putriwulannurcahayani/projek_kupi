@@ -1,67 +1,56 @@
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible"
-		content="IE=edge">
-	<meta name="viewport"
-		content="width=device-width, 
-				initial-scale=1.0">
-	<title>Aplikasi KUPI</title>
-	<link rel="stylesheet"
-		href="dashboard.css"> 
-	<link rel="stylesheet"
-		href="responsive.css">
-    <!-- <link rel="stylesheet" href="produkindex.css"> -->
-	
-		<script>
-			function redirectToBeban() {
-				window.location.href = "{{ route('beban.index') }}";
-			}
-		</script>
-</head>
-<style>
-    h1 {
- text-align: center;
- margin-top: 1px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi KUPI</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        body,
+html {
+ margin: 0;
+ padding: 0;
 }
-/* Menata label dan input */
-form {
- margin-top: 30px; 
- width: 50%;
- margin: 20px auto;
- padding: 20px;
- border: 1px solid #ccc;
- border-radius: 5px;
- box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-label {
- display: block;
- margin-bottom: 1px;
- font-weight: bold;
-}
-input[type="text"],
-input[type="number"],
-textarea {
- width: calc(100% - 12px);
- padding: 8px;
- margin-bottom: 5px;
- border: 1px solid #ccc;
- border-radius: 3px;
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0px 0px;
 }
 
-select {
-    width: calc(100% - 12px);
- padding: 8px;
- margin-bottom: 5px;
- border: 1px solid #ccc;
- border-radius: 3px;
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
-textarea {
- height: 100px;
+
+p {
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+td:nth-child(4) {
+    text-align: right;
 }
 @import url(
 "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -85,17 +74,20 @@ font-family:  'Battambang', Regular;
 }
 body {
 background-color: var(--background-color4);
+margin-top: 0px;
 max-width: 100%;
 overflow-x: hidden;
 }
 
 header {
 height: 70px;
-width: 100vw;
+width: 100%;
 padding: 0 30px;
 background-color: var(--background-color1);
 position: fixed;
-z-index: 100;
+top: 0;
+left: 0;
+z-index: 1000;
 box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
 display: flex;
 justify-content: space-between;
@@ -107,9 +99,11 @@ font-size: 27px;
 font-weight: 600;
 color: rgb(239, 245, 241);
 }
+
 .img {
 	height: 50px;
 }
+
 
 .icn {
 height: 50px;
@@ -177,7 +171,6 @@ align-items: center;
 justify-content: center;
 overflow: hidden;
 }
-
 .main-container {
 display: flex;
 width: 100vw;
@@ -185,7 +178,6 @@ position: relative;
 top: 70px;
 z-index: 1;
 }
-
 .dpicn {
 height: 40px;
 }
@@ -208,11 +200,7 @@ width: 5px;
 .main::-webkit-scrollbar-track {
 background-color: #9e9e9eb2;
 }
-.box-container > .container{
-    background-color: #ffffff;
-    padding: 16px 16px;
-    border-radius: 16px;
-}
+
 .box-container {
 display: flex;
 justify-content: space-evenly;
@@ -273,13 +261,13 @@ align-items: center;
 gap: 30px;
 }
 
-.option4 {
+.option1 {
 border-left: 5px solid #1093B5;
 background-color: var(--Border-color);
 color: white;
 cursor: pointer;
 }
-.option4:hover {
+.option1:hover {
 border-left: 5px solid #00580caf;
 background-color: var(--Border-color);
 }
@@ -409,27 +397,35 @@ border-radius: 4px;
 	justify-content: end;
 	width: 100%;
 }
-
+.batal-button {
+    margin-left: 405px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: red; 
+}
+.batal-button:hover {
+    opacity: 0.7;
+}
 
 .button:hover,
 .batal-button:hover {
     opacity: 0.7;
 }
 button {
-    padding: 8px;
-    border: none;
-    border-radius: 3px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+ padding: 8px 15px;
+ border: none;
+ border-radius: 3px;
+ background-color: #007bff;
+ color: white;
+ cursor: pointer;
 }
-
 button:hover {
-    opacity: 0.7;
+ opacity: 0.8;
 }
-
-
 /* Main CSS Here */
 .img {
 	height: 50px;
@@ -439,28 +435,15 @@ span{
     color: crimson;
 }
 
-
-		.tambah-kategori {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color:#007bff;
-            color: #fff;
+a{
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-			margin-bottom: 20px;
-        }
-
-        a:hover {
-            background-color: #45a049;
-        }
-
-
-	</style>
-<body>
-
+            color: black;
+}
+</style>
+</head>
 	<!-- for header part -->
-	<header>
+<body> 
+<header>
 		<div class="logosec">
             <div class="logo">Keuangan Pintar</div>
             <i class="fas fa-bars icn menuicn" id="menuicn" ></i>
@@ -484,41 +467,47 @@ span{
 				<div class="nav-upper-options">
 					<a href="/dashboard">
 						<div class="nav-option option2">
+							
 							<h3> Dashboard</h3>
 						</div>
+					
 					</a>
-					<a href="/produks">
-					<div class="nav-option option2"> 
+
+					<div class="nav-option option2" onclick="redirectToProduk()">
 						<h3> Produk</h3>
 					</div>
-					</a>
-					<a href="/pendapatans">
+
 					<div class="nav-option option2">
+						
 						<h3> Pendapatan </h3>
 					</div>	
-					</a>
 					
 					
 					@if (auth()->user()->role->nama_role == 'admin')
-					<div class="nav-option option4" onclick="redirectToBeban()">
-						<h3> Beban </h3>
-					</div>
-
-					<a href="/labarugi">
-					<div class="nav-option option5">
-						<h3> Laba Rugi</h3>
-					</div>
-					</a>
+					<a href="/beban">
+						<div class="nav-option option3">
+							<h3> Beban </h3>
+						</div>
+						</a>
+	
+						<a href="{{ route('labarugi.index') }}">
+							<div class="nav-option option5">
+								
+								<h3> Laba Rugi</h3>
+							</div>
+						</a>
 
 					<div class="nav-option option6">
 						
 						<h3> Arus Kas</h3>
 					</div>
 
-					<div class="nav-option option7">
+					<a href="/riwayat">
+					<div class="nav-option option1">
 						
 						<h3> Riwayat</h3>
 					</div>
+				</a>
 
 				<a href="{{route('tambah-pegawai')}}" class="tambah">
 						<div class="nav-option option8">
@@ -542,59 +531,34 @@ span{
 			<div class="tanggal">
 				<p id="tanggal"></p>
 			</div>
-			<div class="container">
-            <h1>Beban Pengeluaran</h1>
-
-            <form action="{{ route('beban.store') }}" method="post">
-                @csrf
-
-                <label for="tanggal">Tanggal :</label><br>
-                <input type="date" id="tanggal" name="tanggal" required>
-                @error('tanggal')
-                <span class="error">{{ $message }}</span>
-                @enderror
-                <br><br>
-				<label class="label-kategori" for="kategori">Kategori :</label><br>
-				<a href="{{route('kategori.index')}}" class="tambah-kategori">Tambah Kategori +</a>
-                <select name="id_kategori" required>
-                        <option value="" disabled selected>Select a Kategori</option>
-                        @foreach($kategoris as $kategori)
-                        
-                            <option value="{{ $kategori->id }}" {{ old('produk') == $kategori->id ? 'selected' : '' }}>
-                                {{ $kategori->nama }}
-                            </option>
-                        
-                        @endforeach
-                    </select>
-                    @error('produk')
-                        <p class="text-red">{{ $message }}</p>
-                    @enderror
-                <br><br>
-                <label for="nama">Nama :</label><br>
-                <input type="text" id="nama_produk" name="nama" required>
-                @error('nama_produk')
-                <span class="error">{{ $message }}</span>
-            @enderror
-                <br><br>
-
-
-                <label for="jumlah">Jumlah :</label><br>
-                <input type="number" id="harga" name="jumlah" required>
-                @error('harga')
-                <span class="error">{{ $message }}</span>
-            @enderror
-                <br><br>
-
-                <label for="harga">Harga:</label><br>
-                <input type="number" id="stok" name="harga" required>
-                @error('stok')
-                <span class="error">{{ $message }}</span>
-            @enderror
-                <br><br>
-
-                <button type="submit">Tambah</button>
-            </form>
-
-	<script src="script.js"></script>
+<div>
+    <h1>RIWAYAT</h1>
+    <p>Periode tanggal:</p>
+    <input type="text" id="startDate" placeholder="dd/mm/yy">
+    <span>-</span>
+    <input type="text" id="endDate" placeholder="dd/mm/yy">
+    <br>
+</dic>
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal Transaksi</th>
+                <th>Kategori Transaksi</th>
+                <th>Nama</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+			@foreach($riwayat as $riwayat)
+			<tr>
+				<td>{{ $riwayat->tanggal_transaksi }}</td>
+				<td>{{ $riwayat->kategori_transaksi }}</td>
+				<td>{{ $riwayat->nama }}</td>
+				<td>{{ $riwayat->total }}</td>
+			</tr>
+			@endforeach
+		</tbody>
+    </table>
+    
 </body>
 </html>

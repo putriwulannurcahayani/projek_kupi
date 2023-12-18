@@ -539,15 +539,14 @@ display: none;
 	width: 100%;
 }
 .batal-button {
-    margin-left: 405px;
+    margin-left: 690px;
     padding: 5px 15px;
     text-decoration: none;
     color: white;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    background-color: blue; 
-    
+    background-color:#007bff; 
 
 }
 .batal-button:hover {

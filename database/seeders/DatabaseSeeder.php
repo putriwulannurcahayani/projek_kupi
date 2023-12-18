@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Kategori;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -49,6 +51,29 @@ class DatabaseSeeder extends Seeder
             "alamat" =>'JL. Melati No.10',
             "no_telepon" =>'081999999999',
             "password" =>'pegawai123',
+        ]);
+
+        Kategori::insert([
+            [
+                "nama" => "Bahan Baku",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "nama" => "Peralatan",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "nama" => "Pajak",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "nama" => "Gaji Karyawan",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ]
         ]);
     }
 }

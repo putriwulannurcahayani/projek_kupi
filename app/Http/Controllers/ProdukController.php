@@ -50,12 +50,26 @@ class ProdukController extends Controller
             'stok' => 'required|numeric|min:1'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
+        
+        $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))->first();
 
-        // Simpan data produk baru ke dalam database
-        produk::create($validatedData);
+        if ($existingProduk) {
+            // Update the existing product's information if needed
+            $existingProduk->update([
+                'harga' => $existingProduk->harga + $request->input('harga'), // Add prices if needed
+                'stok' => $existingProduk->stok + $request->input('stok'),    // Add stock if needed
+            ]);
+    
+            return redirect()->route('produks.index')
+                ->with('success', 'Produk berhasil diperbarui'); // Redirect ke halaman detail produk dengan pesan sukses
+        } else {
+            // Create a new product if no existing product is found
+            Produk::create($validatedData);
+    
+            return redirect()->route('produks.index')
+                ->with('success', 'Produk berhasil ditambahkan'); // Redirect ke halaman detail produk dengan pesan sukses
+        }
 
-        return redirect()->route('produks.index')
-            ->with('success', 'Produk berhasil ditambahkan'); // Redirect ke halaman detail produk dengan pesan sukses
     }
 
     public function edit($id):View

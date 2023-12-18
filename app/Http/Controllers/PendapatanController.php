@@ -3,22 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pendapatan;
+use App\Models\Produk;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Events\KurangiStokProduk;
+use Exception;
 
 class PendapatanController extends Controller
 {
     public function index():View
     {
-        $pendapatans = Pendapatan::all(); // Mengambil semua pendapatan dari database
-        return view('pendapatan', compact('pendapatans')); // Mengirimkan pendapatan ke dalam view
+        $products = Produk::all(); // Assuming you want to retrieve all products
+
+        return view('pendapatan', compact('products')); // Mengirimkan pendapatan ke dalam view
     }
     public function pendapatan()
     {
         // Logika untuk menampilkan formulir pembuatan pendapatan
-        return view('pendapatan'); // Gantilah 'pendapatan.create' dengan nama view yang sesuai
+        return view('pendapatan'); 
+
     }
 
     public function store(Request $request): RedirectResponse
@@ -26,18 +31,41 @@ class PendapatanController extends Controller
         // Validasi data yang diterima dari formulir
         $validatedData = $request->validate([
             'tanggal' => 'required',
-            'produk' => 'required',
-            'jumlah_produk' => 'required|numeric|min:1',
-            'total' => 'required|numeric|min:1'
+            'id_produk' => 'required|exists:produks,id', // Make sure the product exists
+            'jumlah_produk' => [
+                'required',
+                'numeric',
+                'min:1',
+                function ($attribute, $value, $fail) use ($request) {
+                    // Custom validation rule to check if the quantity is greater than the available stock
+                    $product = Produk::find($request->id_produk);
+                    if ($product && $value > $product->stok) {
+                        $fail('Jumlah Produk Tidak Boleh Melebih Stoking');
+                    }
+                },
+            ],
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
-
+    
+        $product = Produk::find($validatedData['id_produk']);
+    
+        $validatedData['total'] = $product->harga * $validatedData['jumlah_produk'];
+    
+        $stok = $product->stok - $validatedData['jumlah_produk'];
+    
+        $product->update([
+            'stok' => $stok
+        ]);
+    
         // Simpan data pendapatan baru ke dalam database
-        pendapatan::create($validatedData);
-
+        Pendapatan::create($validatedData);
+    
+        // event(new KurangiStokProduk($produk, $jumlah_produk));
+    
         return redirect()->route('pendapatans')
             ->with('success', 'Transaksi baru berhasil ditambahkan'); // Redirect ke halaman detail pendapatan dengan pesan sukses
     }
+    
 
     // public function edit($id):View
     // {

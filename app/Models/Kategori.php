@@ -15,6 +15,6 @@ class Kategori extends Model
 
     public function bebans()
     {
-        return $this->hasMany(Beban::class);
+        return $this->hasMany(Beban::class,'id_kategori','id');
     }
 }

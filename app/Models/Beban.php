@@ -10,13 +10,10 @@ class Beban extends Model
     protected $table = 'bebans';
 
     protected $fillable = [
-        'tanggal', 'nama','kategori', 'jumlah', 'total_biaya',
+        'tanggal', 'nama','kategori', 'jumlah', 'harga','id_kategori'
         // Kolom lain yang ingin diisi secara massal
     ];
 
     // Contoh relasi dengan model lain
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
+    
 }

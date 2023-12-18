@@ -416,20 +416,16 @@ border-radius: 4px;
     opacity: 0.7;
 }
 button {
-    padding: 8px;
-    border: none;
-    border-radius: 3px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+ padding: 8px 15px;
+ border: none;
+ border-radius: 3px;
+ background-color: #007bff;
+ color: white;
+ cursor: pointer;
 }
-
 button:hover {
-    opacity: 0.7;
+ opacity: 0.8;
 }
-
-
 /* Main CSS Here */
 .img {
 	height: 50px;
@@ -439,23 +435,26 @@ span{
     color: crimson;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
 
-		.tambah-kategori {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color:#007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-			margin-bottom: 20px;
-        }
+.batal-button {
+    margin-left: 380px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: red; 
+    
 
-        a:hover {
-            background-color: #45a049;
-        }
-
-
+}
+.batal-button:hover {
+    opacity: 0.7;
+}
 	</style>
 <body>
 
@@ -487,11 +486,11 @@ span{
 							<h3> Dashboard</h3>
 						</div>
 					</a>
-					<a href="/produks">
-					<div class="nav-option option2"> 
+
+					<div class="nav-option option2" onclick="redirectToProduk()">
 						<h3> Produk</h3>
 					</div>
-					</a>
+
 					<a href="/pendapatans">
 					<div class="nav-option option2">
 						<h3> Pendapatan </h3>
@@ -543,56 +542,20 @@ span{
 				<p id="tanggal"></p>
 			</div>
 			<div class="container">
-            <h1>Beban Pengeluaran</h1>
+            <h1>Kategori </h1>
 
-            <form action="{{ route('beban.store') }}" method="post">
+            <form action="{{ route('kategori.store') }}" method="post">
                 @csrf
 
-                <label for="tanggal">Tanggal :</label><br>
-                <input type="date" id="tanggal" name="tanggal" required>
-                @error('tanggal')
+                <label for="tanggal">Nama Kategori :</label><br>
+                <input type="text" id="kategori" name="nama" required>
+                @error('kategori')
                 <span class="error">{{ $message }}</span>
                 @enderror
                 <br><br>
-				<label class="label-kategori" for="kategori">Kategori :</label><br>
-				<a href="{{route('kategori.index')}}" class="tambah-kategori">Tambah Kategori +</a>
-                <select name="id_kategori" required>
-                        <option value="" disabled selected>Select a Kategori</option>
-                        @foreach($kategoris as $kategori)
-                        
-                            <option value="{{ $kategori->id }}" {{ old('produk') == $kategori->id ? 'selected' : '' }}>
-                                {{ $kategori->nama }}
-                            </option>
-                        
-                        @endforeach
-                    </select>
-                    @error('produk')
-                        <p class="text-red">{{ $message }}</p>
-                    @enderror
-                <br><br>
-                <label for="nama">Nama :</label><br>
-                <input type="text" id="nama_produk" name="nama" required>
-                @error('nama_produk')
-                <span class="error">{{ $message }}</span>
-            @enderror
-                <br><br>
-
-
-                <label for="jumlah">Jumlah :</label><br>
-                <input type="number" id="harga" name="jumlah" required>
-                @error('harga')
-                <span class="error">{{ $message }}</span>
-            @enderror
-                <br><br>
-
-                <label for="harga">Harga:</label><br>
-                <input type="number" id="stok" name="harga" required>
-                @error('stok')
-                <span class="error">{{ $message }}</span>
-            @enderror
-                <br><br>
 
                 <button type="submit">Tambah</button>
+                <a href="{{ route('beban.index') }}" class="batal-button">Kembali </a>
             </form>
 
 	<script src="script.js"></script>

@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+
+ public function profile(){
+     $nama = auth()->user()->nama;
+     $email = auth()->user()->email;
+     $namaUsaha = auth()->user()->nama_usaha;
+     $alamat = auth()->user()->alamat;
+     $noTelepon = auth()->user()->no_telepon;
+     $role = auth()->user()->role->nama_role;
+    
+     return view('user.edit',compact('nama','email','namaUsaha','alamat','noTelepon','role'));   
+ }
+
  public function index(){
 
     $nama = auth()->user()->nama;
@@ -60,6 +72,6 @@ class ProfileController extends Controller
      // If new password is provided, update the password
     
  
-     return redirect()->back()->with('success', 'Profile updated successfully.');
+     return redirect()->route('profile')->with('success', 'Profile updated successfully.');
  }
 }
