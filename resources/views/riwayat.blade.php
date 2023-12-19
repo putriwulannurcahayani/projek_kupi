@@ -439,6 +439,24 @@ a{
             text-decoration: none;
             color: black;
 }
+
+button-pendapatan{
+	padding: 8px 15px;
+ border: none;
+ border-radius: 3px;
+ background-color: #007bff;
+ color: white;
+ cursor: pointer;
+}
+
+button-beban{
+	padding: 8px 15px;
+ border: none;
+ border-radius: 3px;
+ background-color: #007bff;
+ color: white;
+ cursor: pointer;
+}
 </style>
 </head>
 	<!-- for header part -->
@@ -473,14 +491,17 @@ a{
 					
 					</a>
 
-					<div class="nav-option option2" onclick="redirectToProduk()">
+					<a href="/produks">
+					<div class="nav-option option2">
 						<h3> Produk</h3>
 					</div>
+					</a>
 
+					<a href="/pendapatans">
 					<div class="nav-option option2">
-						
 						<h3> Pendapatan </h3>
 					</div>	
+					</a>
 					
 					
 					@if (auth()->user()->role->nama_role == 'admin')
@@ -532,7 +553,11 @@ a{
 				<p id="tanggal"></p>
 			</div>
 <div>
-    <h1>RIWAYAT</h1>
+	<button-pendapatan typr="submit">Pendapatan</button-pendapatan>
+	<form action="{{ route('riwayatbeban') }}" method="GET">
+		@csrf
+		<button typr="submit">Beban</button> </form>
+    <h1>RIWAYAT PENDAPATAN</h1>
     <p>Periode tanggal:</p>
     <input type="text" id="startDate" placeholder="dd/mm/yy">
     <span>-</span>
@@ -543,18 +568,18 @@ a{
         <thead>
             <tr>
                 <th>Tanggal Transaksi</th>
-                <th>Kategori Transaksi</th>
                 <th>Nama</th>
+                <th>Jumlah Produk</th>
                 <th>Total</th>
             </tr>
         </thead>
         <tbody>
-			@foreach($riwayat as $riwayat)
+			@foreach($pendapatan as $p)
 			<tr>
-				<td>{{ $riwayat->tanggal_transaksi }}</td>
-				<td>{{ $riwayat->kategori_transaksi }}</td>
-				<td>{{ $riwayat->nama }}</td>
-				<td>{{ $riwayat->total }}</td>
+				<td>{{ $p->tanggal }}</td>
+				<td>{{ $p->produk->nama_produk }}</td>
+				<td>{{ $p->jumlah_produk }}</td>
+				<td>{{ $p->total }}</td>
 			</tr>
 			@endforeach
 		</tbody>

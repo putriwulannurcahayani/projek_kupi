@@ -174,7 +174,7 @@
                     </div>
 
                     <a href="/riwayat">
-                        <div class="nav-option option1">
+                        <div class="nav-option option4">
                             
                             <h3> Riwayat</h3>
                         </div>

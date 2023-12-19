@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/kategori',KategoriController::class);
 
     Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat');
+    Route::get('/riwayatbeban',[RiwayatController::class, 'indexBeban'])->name('riwayatbeban');
 
     Route::get('/labarugi', [LabaRugiController::class, 'hitungLabaRugi'])->name('labarugi.index');
 });

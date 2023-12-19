@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use App\Models\Beban;
 
 class KategoriController extends Controller
 {
@@ -12,7 +13,11 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('beban.kategori');
+        // return view('beban.kategori');
+        $beban = Beban::all();
+        $kategoris = Kategori::all();
+
+        return view('nama.view.anda', compact('beban', 'kategoris'));
     }
 
     /**

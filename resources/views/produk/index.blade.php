@@ -83,10 +83,11 @@
 						<h3> Arus Kas</h3>
 					</div>
 
+					<a href="/riwayat">
 					<div class="nav-option option7">
-						
 						<h3> Riwayat</h3>
 					</div>
+					</a>
 
 				<a href="{{route('tambah-pegawai')}}" class="tambah">
 						<div class="nav-option option8">

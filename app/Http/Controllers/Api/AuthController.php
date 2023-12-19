@@ -26,7 +26,7 @@ class AuthController extends Controller
         if (Auth::attempt($request->only(['email','password']))) {
 
             $user = auth()->user();
-            $token = $user->createToken("api_token")->plainTextToken;
+            $token = $user->createToken('api_token')->plainTextToken;
 
             return response()->json(["token" => $token,"user" => $user], 200);
         }
@@ -46,4 +46,4 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Token Berhasil Dihapus']);
     }
-}
+}   

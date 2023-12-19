@@ -40,7 +40,7 @@ class PendapatanController extends Controller
                     // Custom validation rule to check if the quantity is greater than the available stock
                     $product = Produk::find($request->id_produk);
                     if ($product && $value > $product->stok) {
-                        $fail('Jumlah Produk Tidak Boleh Melebih Stoking');
+                        $fail('Jumlah Produk Melebihi Stok Yang Tersedia');
                     }
                 },
             ],

@@ -14,6 +14,8 @@ class Beban extends Model
         // Kolom lain yang ingin diisi secara massal
     ];
 
-    // Contoh relasi dengan model lain
-    
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 }

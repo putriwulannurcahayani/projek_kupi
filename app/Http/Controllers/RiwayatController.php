@@ -12,16 +12,19 @@ class RiwayatController extends Controller
     public function index(): View
     {
         $pendapatan = Pendapatan::orderBy('created_at', 'desc')->get();
-        $beban = Beban::orderBy('created_at', 'desc')->get();
 
         return view('riwayat', [
             'pendapatan' => $pendapatan,
+        ]);
+    }
+
+    public function indexBeban(): View
+    {
+        $beban = Beban::orderBy('created_at', 'desc')->get();
+
+        return view('riwayatbeban', [
             'beban' => $beban,
         ]);
-        
-        $riwayats = $pendapatan->merge($beban);
-
-        return view('riwayat', ['riwayats' => $riwayats]);
     }
     
 }

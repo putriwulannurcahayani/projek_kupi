@@ -227,7 +227,7 @@ input {
                     <form action="{{route('editProfile')}}" method="POST">
                         @method('put')
                         @csrf
-                
+
                         <label for="nama">Nama:</label>
                         <input type="text" id="nama" value="{{ $nama }}" placeholder="Nama" name="nama">
                 
