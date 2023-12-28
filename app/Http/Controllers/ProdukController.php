@@ -56,7 +56,7 @@ class ProdukController extends Controller
         if ($existingProduk) {
             // Update the existing product's information if needed
             $existingProduk->update([
-                'harga' => $existingProduk->harga + $request->input('harga'), // Add prices if needed
+                // 'harga' => $existingProduk->harga + $request->input('harga'), // Add prices if needed
                 'stok' => $existingProduk->stok + $request->input('stok'),    // Add stock if needed
             ]);
     

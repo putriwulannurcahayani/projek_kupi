@@ -36,15 +36,20 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [dashboardController::class,'index']);
-    Route::post('/logout', [signupController::class,'logout'])->name('logout');
+    Route::get('/dashboard', [dashboardController::class,'index'])->name('dashboard');
+    Route::get('/logout', [signupController::class,'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::post('/signup', [signupController::class, 'register'])->name('signup');
     Route::get("/tambah-pegawai",[signupController::class,'index'])->name('tambah-pegawai');
+    Route::get("/pegawai",[signupController::class,'daftarPegawai'])->name('daftarPegawai');
     Route::post("/tambah-pegawai",[signupController::class,'register'])->name('tambah-pegawai.store');
+    Route::get("/print-pegawai",[signupController::class,'print'])->name('print-pegawai');
+    Route::delete('/pegawai/{id}', [signupController::class, 'destroy'])->name('pegawai.destroy');
     Route::put('/edit-profile', [ProfileController::class,'update'])->name('editProfile');
     Route::get('/produks/cetak',[ProdukController::class, 'cetak'])->name('produks.cetak');
     Route::get('/profileedit', [ProfileController::class,'profile'])->name('profileedit');
+    Route::get('/ganti-password', [ProfileController::class,'password'])->name('ganti-password');
+    Route::post('/gantipassword', [ProfileController::class,'gantiPassword'])->name('gantiPassword');
 
     Route::get('/produks/laporan',[ProdukController::class, 'laporan'])->name('produks.laporan');
     Route::get('/produks/create', 'ProdukController@create')->name('produks.create');
@@ -66,10 +71,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/beban/store', [BebanController::class, 'store'])->name('beban.store');
     Route::resource('/kategori',KategoriController::class);
 
-    Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat');
+    Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat.index');
     Route::get('/riwayatbeban',[RiwayatController::class, 'indexBeban'])->name('riwayatbeban');
 
     Route::get('/labarugi', [LabaRugiController::class, 'hitungLabaRugi'])->name('labarugi.index');
+
+    Route::get('/pegawais/laporan', [SignupController::class, 'laporan'])->name('pegawais.laporan');
 });
 
 

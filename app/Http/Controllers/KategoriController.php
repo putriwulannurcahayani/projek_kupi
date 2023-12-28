@@ -17,7 +17,7 @@ class KategoriController extends Controller
         $beban = Beban::all();
         $kategoris = Kategori::all();
 
-        return view('nama.view.anda', compact('beban', 'kategoris'));
+        return view('beban.kategori', compact('beban', 'kategoris'));
     }
 
     /**

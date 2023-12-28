@@ -37,7 +37,7 @@
       </form>
     </div>
     <p> 
-        <img src="images/imageslogokupi.png"style="width:300px;height:300px;"/>
+        <img src="images/kupi.png"style="width:300px;height:300px;"/>
     </p>
   </body>
 </html>
