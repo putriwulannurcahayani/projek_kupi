@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Hai, Admin')
+@section('title', 'Hai, Admin🖐️')
 
 @section('contents')
   <div class="row">

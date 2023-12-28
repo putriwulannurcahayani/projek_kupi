@@ -10,21 +10,22 @@
             <div class="col-md-9">
                 <div class="card bg-light mb-6">
                     <div class="card-header text-center">
-                        <h5>Laba Rugi</h5>
+                        <h5>TOKO {{ $namaUsaha }}</h5>
                         <p>Tanggal: {{ \Carbon\Carbon::now()->format('d-m-y') }}</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <h5>Pendapatan</h5>
-                                <div class="card-body">
-                                    <!-- Your Pendapatan content here -->
+                                <div class="total-pendapatan d-flex justify-content-between">
+                                    <span>Total Pendapatan</span>
+                                    <span>{{ $totalPendapatan }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <h5>Beban</h5>
+                                <h5>Pengeluaran</h5>
                                 <div class="card-body">
                                     @foreach ($kategoris as $kategori)
                                     <div class="beban-kategori mb-8">
