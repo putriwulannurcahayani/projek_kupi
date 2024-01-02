@@ -69,7 +69,6 @@ class ProdukController extends Controller
             return redirect()->route('produks.index')
                 ->with('success', 'Produk berhasil ditambahkan'); // Redirect ke halaman detail produk dengan pesan sukses
         }
-
     }
 
     public function edit($id):View
@@ -84,9 +83,7 @@ class ProdukController extends Controller
         $validatedData = $request->validate([
             'nama_produk' => 'required',
             'harga' => 'required|numeric',
-            'stok' => 'required|numeric|min:0'
-            // Sesuaikan validasi dengan kebutuhan Anda
-        ]);
+           ]);
 
         // Perbarui data produk yang ada di dalam database
         $produk = Produk::findOrFail($id);

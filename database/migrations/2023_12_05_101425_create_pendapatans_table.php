@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tanggal');
             $table->unsignedBigInteger('id_produk');
             $table->string('jumlah_produk');
+            $table->integer('harga_produk');
             $table->integer('total');
             $table->timestamps();
     

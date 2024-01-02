@@ -9,6 +9,10 @@
       .text-red{
         color: crimson;
       }
+      p{
+        color: #0f172a; 
+        /* text-align: start; */
+      }
     </style>
     <!-- Add Font Awesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,6 +20,10 @@
   </head>
   <body>
     <div class="wrapper">
+      @if (session()->has('success'))
+          <p>{{ session('success') }}</p>
+      @endif
+      <p></p>
       <form action="{{route('login')}}" class="signup-form" method="POST">
         @csrf
         <h2>Login</h2>
@@ -35,6 +43,7 @@
           <input type="submit" value="LOGIN">
         </div>
       </form>
+      <p>Belum Punya Akun ? <a href="{{ route('register.index') }}">Register Disini  </a></p>
     </div>
     <p> 
         <img src="images/kupi.png"style="width:300px;height:300px;"/>

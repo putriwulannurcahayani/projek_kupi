@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArusKasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\loginController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\BebanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LabaRugiController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RiwayatController;
 
 
@@ -32,7 +34,10 @@ Route::get('/', function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [loginController::class, 'index'])->name('viewLogin');
     Route::post('/login', [loginController::class, 'login'])->name('login');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
 });
+
 
 
 Route::middleware('auth')->group(function () {
@@ -75,8 +80,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/riwayatbeban',[RiwayatController::class, 'indexBeban'])->name('riwayatbeban');
 
     Route::get('/labarugi', [LabaRugiController::class, 'hitungLabaRugi'])->name('labarugi.index');
-
+    Route::get('/aruskas', [ArusKasController::class, 'index'])->name('aruskas.index');
     Route::get('/pegawais/laporan', [SignupController::class, 'laporan'])->name('pegawais.laporan');
+
+    
 });
 
 

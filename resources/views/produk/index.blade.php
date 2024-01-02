@@ -28,7 +28,7 @@
                                 <th scope="col">Nama Produk</th>
                                 <th scope="col">Harga</th>
                                 <th scope="col">Stok</th>
-                                <th scope="col">Aksi</th>
+                                <th class="text-center" scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,12 +38,11 @@
                                     <td>{{ $produk->nama_produk }}</td>
                                     <td>{{ $produk->harga }}</td>
                                     <td>{{ $produk->stok }}</td>
-                                    <td class="action-buttons">
-                                        {{-- <a href="{{ route('produks.edit', $produk->id) }}" class="btn btn-primary">Edit</a> --}}
-                                        <form action="{{ route('produks.destroy', $produk->id) }}" method="POST">
+                                    <td class="action-buttons d-flex justify-content-center">
+                                        <a href="{{ route('produks.edit', $produk->id) }}" class="btn btn-primary">Edit</a>
+                                        <form class="d-inline ml-3  " action="{{ route('produks.destroy', $produk->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            
                                             <button type="submit" class="btn btn-danger ">Hapus</button>
                                         </form>
                                     </td>

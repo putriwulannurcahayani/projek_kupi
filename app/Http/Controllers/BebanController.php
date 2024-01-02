@@ -57,7 +57,7 @@ class BebanController extends Controller
         // Simpan data beban baru ke dalam database
         beban::create($validatedData);
 
-        return redirect()->route('beban.index')
+        return redirect()->route('riwayatbeban')
             ->with('success', 'pengeluaran berhasil ditambahkan'); // Redirect ke halaman detail beban dengan pesan sukses
     }
 }

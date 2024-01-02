@@ -51,7 +51,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('dashboard') }}">
+    <a class="nav-link" href="{{ route('aruskas.index') }}">
       <i class="fas fa-exchange-alt"></i>
       <span>Arus Kas</span></a>
 </li>

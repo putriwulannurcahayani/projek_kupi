@@ -31,7 +31,7 @@ class PendapatanController extends Controller
         // Validasi data yang diterima dari formulir
         $validatedData = $request->validate([
             'tanggal' => 'required',
-            'id_produk' => 'required|exists:produks,id', // Make sure the product exists
+            'id_produk' => 'required|exists:produks,id', // Make sure the product exists // Make sure the product exists
             'jumlah_produk' => [
                 'required',
                 'numeric',
@@ -48,7 +48,9 @@ class PendapatanController extends Controller
         ]);
     
         $product = Produk::find($validatedData['id_produk']);
-    
+
+        $validatedData['harga_produk'] = $product->harga;
+        
         $validatedData['total'] = $product->harga * $validatedData['jumlah_produk'];
     
         $stok = $product->stok - $validatedData['jumlah_produk'];
@@ -62,7 +64,7 @@ class PendapatanController extends Controller
     
         // event(new KurangiStokProduk($produk, $jumlah_produk));
     
-        return redirect()->route('pendapatans')
+        return redirect()->route('riwayat.index')
             ->with('success', 'Transaksi baru berhasil ditambahkan'); // Redirect ke halaman detail pendapatan dengan pesan sukses
     }
     

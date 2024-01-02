@@ -3,6 +3,18 @@
 @section('title', 'Hai, Admin🖐️')
 
 @section('contents')
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+</style>
   <div class="row">
 
     <!-- Earnings (Monthly) Card Example -->
@@ -13,7 +25,7 @@
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                 Pendapatan</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">RP.0</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ $totalPendapatan }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -31,7 +43,7 @@
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                 Pengeluaran</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">RP.0</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ $totalBeban }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -51,7 +63,7 @@
               </div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Rp {{ $labaRugi }}</div>
                 </div>
                 <div class="col">
                   <div class="progress progress-sm mr-2">
@@ -76,7 +88,7 @@
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                 Total Pembelian</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pendapatan }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -96,7 +108,7 @@
       <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Grafik Pendapatan</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Grafik Laba Rugi</h6>
           <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -111,9 +123,10 @@
           </div>
         </div>
         <!-- Card Body -->
-        <div class="card-body">
+        <div class="">
           <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
+            <div id="chart">
+            </div>
           </div>
         </div>
       </div>
@@ -124,7 +137,7 @@
       <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Grafik Arus Kas</h6>
           <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -162,4 +175,12 @@
   <!-- Content Row -->
   <div class="row">
   </div>
+
+  <script>
+    let datas = @json($chartOptions);
+
+    var chart = new ApexCharts(document.querySelector("#chart"), datas);
+
+    chart.render();
+  </script>
 @endsection

@@ -9,7 +9,7 @@
         <p id="tanggal"></p>
     </div>
     <div class="row d-flex justify-content-center">
-        <div class="col-8">
+        <div class="col-8eb">
             <form action="{{route('editProfile')}}" method="POST" enctype="multipart/form-data">
                 @method('put')
                 @csrf

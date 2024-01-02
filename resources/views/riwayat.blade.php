@@ -27,6 +27,7 @@
                 <th>Tanggal Transaksi</th>
                 <th>Nama</th>
                 <th>Jumlah Produk</th>
+                <th>Harga</th>
                 <th>Total</th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td>{{ $p->tanggal }}</td>
                 <td>{{ $p->produk->nama_produk }}</td>
                 <td>{{ $p->jumlah_produk }}</td>
+                <td>{{ $p->harga_produk }}</td>
                 <td>{{ $p->total }}</td>
             </tr>
             @endforeach

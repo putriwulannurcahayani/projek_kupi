@@ -56,7 +56,6 @@
         <img class="img-profile rounded-circle" src="{{ asset('images/polosan.png') }}">
         @endif
       </a>
-      <
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         <a class="dropdown-item" href="{{ route('profile') }}">

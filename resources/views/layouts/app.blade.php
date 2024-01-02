@@ -9,6 +9,19 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+  </style>
+
   <title>Aplikasi KUPI</title>
 
   <!-- Custom fonts for this template-->
@@ -18,6 +31,8 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  
 </head>
 
 <body id="page-top">
@@ -85,7 +100,6 @@
 
   <!-- Page level plugins -->
   <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-
 </body>
 
 </html>
