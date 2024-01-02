@@ -39,11 +39,11 @@
                 @enderror
 
 
-                {{-- <label for="jumlah">Jumlah :</label><br>
+                <label for="jumlah">Jumlah :</label><br>
                 <input type="number" id="harga" name="jumlah" required class="form-control">
                 @error('harga')
                     <span class="error">{{ $message }}</span>
-                @enderror --}}
+                @enderror
 
 
                 <label for="harga">Harga:</label><br>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Beban;
 use App\Models\Pendapatan;
+use App\Models\Saldo;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -15,31 +16,37 @@ class dashboardController extends Controller
  
     public function index(): View
     {   
+
+        $cekSaldo = Saldo::where('user_id', auth()->user()->id)->first();
         $totalPendapatan = Pendapatan::sum('total');
         $totalBeban = Beban::sum('harga');
         $labaRugi = $totalPendapatan - $totalBeban;
-        // dd($labaRugi);
-
         $pendapatan = Pendapatan::orderBy('created_at', 'desc')->count();
-        // Fetch monthly data for chart
-        $monthlyData = Pendapatan::selectRaw('
-                MONTH(pendapatans.created_at) as month,
-                SUM(pendapatans.total) - COALESCE(SUM(bebans.harga), 0) as laba_rugi'
-            )
-            ->leftJoin('bebans', function ($join) {
-                $join->on(DB::raw('MONTH(pendapatans.created_at)'), '=', DB::raw('MONTH(bebans.created_at)'));
-                $join->on(DB::raw('YEAR(pendapatans.created_at)'), '=', DB::raw('YEAR(bebans.created_at)'));
-            })
-            ->whereYear('pendapatans.created_at', Carbon::now()->year)
-            ->groupBy(DB::raw('MONTH(pendapatans.created_at)'))
-            ->orderBy(DB::raw('MONTH(pendapatans.created_at)'))
-            ->pluck('laba_rugi', 'month')
+
+        // Mengambil data pendapatan dan beban untuk setiap bulan
+        $monthlyData = Pendapatan::selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->keyBy('month')
             ->toArray();
     
-        // Initialize data array with 0 values for all months
+        $monthlyExpenses = Beban::selectRaw('MONTH(created_at) as month, SUM(harga) as harga')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->keyBy('month')
+            ->toArray();
+    
+        // Inisialisasi data array dengan nilai 0 untuk semua bulan
         $monthlyChartData = array_fill(1, 12, 0);
     
-        foreach ($monthlyData as $month => $labaRugi) {
+        // Menghitung laba/rugi untuk setiap bulan
+        foreach (range(1, 12) as $month) {
+            $totalPendapatan = $monthlyData[$month]['total'] ?? 0;
+            $totalBeban = $monthlyExpenses[$month]['harga'] ?? 0;
+            $labaRugi = $totalPendapatan - $totalBeban;
+    
             $monthlyChartData[$month] = $labaRugi;
         }
     
@@ -58,7 +65,7 @@ class dashboardController extends Controller
             ]
         ];
     
-        return view('dashboard', compact('chartOptions','totalPendapatan','totalBeban','pendapatan','labaRugi'));
-    }
+        return view('dashboard', compact('chartOptions','totalPendapatan','totalBeban','pendapatan','labaRugi','cekSaldo'));
+    }    
 
 }

@@ -3,6 +3,23 @@
 @section('title', 'Hai, Admin🖐️')
 
 @section('contents')
+<div class="col-6">
+  <form action="{{ route('saldo.store') }}" method="post"> <!-- Tambahkan method="post" untuk mengirimkan form -->
+      @csrf <!-- Tambahkan CSRF token untuk keamanan form -->
+      <div class="d-flex align-items-end justify-content-center mb-3">
+          <label for="stok" class="flex-shrink-0 mr-2" style="color: black;">Modal Awal Usaha</label>
+          <input type="number" id="stok" name="saldo" class="form-control mr-2" placeholder="Masukkan " @if ($cekSaldo) value="{{ $cekSaldo->saldo }}"
+              readonly
+          @endif required>
+          @error('saldo') <!-- Perbaiki error message agar sesuai dengan nama input yang benar -->
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
+          @if (!$cekSaldo)
+          <button type="submit" class="btn btn-primary">OKE</button> <!-- Tambahkan type="submit" pada tombol -->
+          @endif  
+      </div>
+  </form>
+</div>
 <style>
   @import url(https://fonts.googleapis.com/css?family=Roboto);
 
@@ -10,9 +27,8 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-#chart {
-  max-width: 650px;
-  margin: 35px auto;
+.pt-4 {
+  padding-top: 0 !important;
 }
 </style>
   <div class="row">
@@ -104,7 +120,7 @@ body {
   <div class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
+    <div class="col-xl-6 col-lg-6">
       <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -133,7 +149,7 @@ body {
     </div>
 
     <!-- Pie Chart -->
-    <div class="col-xl-4 col-lg-5">
+    <div class="col-xl-6 col-lg-6">
       <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -154,9 +170,9 @@ body {
         <!-- Card Body -->
         <div class="card-body">
           <div class="chart-pie pt-4 pb-2">
-            <canvas id="myPieChart"></canvas>
+            <div id="pieChart"></div>
           </div>
-          <div class="mt-4 text-center small">
+          {{-- <div class="mt-4 text-center small">
             <span class="mr-2">
               <i class="fas fa-circle text-primary"></i> Direct
             </span>
@@ -166,7 +182,7 @@ body {
             <span class="mr-2">
               <i class="fas fa-circle text-info"></i> Referral
             </span>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -178,9 +194,33 @@ body {
 
   <script>
     let datas = @json($chartOptions);
+    let kasDiterima = @json($totalPendapatan);
+    let kasKeluar = @json($totalBeban);
+    let saldoAkhir = @json($labaRugi);
 
     var chart = new ApexCharts(document.querySelector("#chart"), datas);
 
     chart.render();
+
+    var options = {
+          series: [, 55, 41],
+          chart: {
+          type: 'donut',
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var pieChart = new ApexCharts(document.querySelector("#pieChart"), options);
+        pieChart.render();
   </script>
 @endsection

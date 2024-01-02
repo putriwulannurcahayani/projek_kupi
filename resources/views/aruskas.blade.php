@@ -60,14 +60,13 @@
                     </tr>
                 </tbody>
             </table>
-
-            <p>Total aliran kas bersih dari operasi: Rp. xxxxx</p>
+            
         </section>
 
         <section class="saldo">
             <h2>Saldo</h2>
-            <p>Saldo Awal: Rp. xxxxx</p>
-            <p>Saldo Akhir: Rp. xxxxx</p>
+            <p>Saldo Awal : {{ !$cekSaldo ? 0 : $cekSaldo->saldo }}</p>
+            <p>Saldo Akhir: Rp. {{ $labaRugi }} </p>
         </section>
     </main>
 </body>

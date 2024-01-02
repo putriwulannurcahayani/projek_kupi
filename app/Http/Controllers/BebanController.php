@@ -45,6 +45,7 @@ class BebanController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Validasi data yang diterima dari formulir
+        // dd($request->all());
         $validatedData = $request->validate([
             'tanggal' => 'required',
             'nama' => 'required',
@@ -55,7 +56,7 @@ class BebanController extends Controller
         ]);
 
         // Simpan data beban baru ke dalam database
-        beban::create($validatedData);
+        beban::create($request->all());
 
         return redirect()->route('riwayatbeban')
             ->with('success', 'pengeluaran berhasil ditambahkan'); // Redirect ke halaman detail beban dengan pesan sukses

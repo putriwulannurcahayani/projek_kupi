@@ -13,7 +13,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RiwayatController;
-
+use App\Http\Controllers\SaldoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/aruskas', [ArusKasController::class, 'index'])->name('aruskas.index');
     Route::get('/pegawais/laporan', [SignupController::class, 'laporan'])->name('pegawais.laporan');
 
-    
+    Route::resource('/saldo', SaldoController::class);
 });
 
 
