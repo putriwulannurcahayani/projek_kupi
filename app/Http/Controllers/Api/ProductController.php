@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $produks = Produk::all(); // Mengambil semua produk dari database
+        $produks = Produk::where('id_usaha', auth()->user()->id_usaha)->get(); // Mengambil semua produk dari database
         return response()->json($produks); // Mengirimkan produk ke dalam view
     }
 
@@ -35,8 +36,9 @@ class ProductController extends Controller
             'stok' => 'required|numeric|min:1'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
+        $validatedData['id_usaha'] = auth()->user()->id_usaha;
         
-        $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))->first();
+        $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))->where('id_usaha', auth()->user()->id_usaha)->first();
 
         if ($existingProduk) {
             // Update the existing product's information if needed
@@ -72,16 +74,31 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi data yang diterima dari formulir
+        $validatedData = $request->validate([
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+           ]);
+
+        // Perbarui data produk yang ada di dalam database
+        $produk = Produk::findOrFail($id);
+        $produk->update($request->all());
+
+        return response()->json(['message' => 'Produk berhasil diperbarui']);  
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Hapus data produk dari database
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+
+        return response()->json(["message" => "Produk Berhasil dihapus"]); // Redirect ke halaman daftar produk dengan pesan sukses
     }
+    
 }

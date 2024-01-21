@@ -32,11 +32,11 @@ class SaldoController extends Controller
             "saldo" => "required"
         ]);
 
-        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['id_usaha'] = auth()->user()->id_usaha;
 
         // dd($validatedData);
         Saldo::create($validatedData);
-        return redirect()->route('dashboard')->with('succeess', "Berhasil Tambah Saldo");
+        return redirect()->route('dashboard')->with('succeess', "Berhasil Tambah Modal Awal");
     }
 
     /**

@@ -5,11 +5,23 @@
 @section('contents')
 
 <body>
+    @if (session()->has('success'))
+    <div class="d-flex justify-content-end">
+      <div class="toast my-4 bg-primary" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+        <div class="toast-header bg-primary text-light justify-content-between">
+          <div class="toast-body text-ligth">
+            {{ session('success') }}
+          </div>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    @endif
     <div class="container">
-        <div class="main-body">
-            @if (session()->has('success'))
-                {{session('success') }}
-            @endif
+        <div class="main-body">  
+             
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
                     <div class="card">
@@ -79,5 +91,13 @@
 
         </div>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+    myToast.show();
+  });
+</script>
 </body>
 @endsection
+

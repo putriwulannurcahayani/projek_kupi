@@ -14,6 +14,8 @@ use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\LandingPageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,11 @@ use App\Http\Controllers\SaldoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [LandingPageController::class, 'show'])->name('landingPage');//
 
 
 Route::middleware('guest')->group(function () {
@@ -45,11 +49,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [signupController::class,'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::post('/signup', [signupController::class, 'register'])->name('signup');
-    Route::get("/tambah-pegawai",[signupController::class,'index'])->name('tambah-pegawai');
-    Route::get("/pegawai",[signupController::class,'daftarPegawai'])->name('daftarPegawai');
-    Route::post("/tambah-pegawai",[signupController::class,'register'])->name('tambah-pegawai.store');
-    Route::get("/print-pegawai",[signupController::class,'print'])->name('print-pegawai');
-    Route::delete('/pegawai/{id}', [signupController::class, 'destroy'])->name('pegawai.destroy');
+
+    Route::middleware('only_admin')->group(function() {
+         Route::get("/tambah-pegawai",[signupController::class,'index'])->name('tambah-pegawai');
+        Route::get("/pegawai",[signupController::class,'daftarPegawai'])->name('daftarPegawai');
+        Route::post("/tambah-pegawai",[signupController::class,'register'])->name('tambah-pegawai.store');
+        Route::get("/print-pegawai",[signupController::class,'print'])->name('print-pegawai');
+        Route::delete('/pegawai/{id}', [signupController::class, 'destroy'])->name('pegawai.destroy');
+
+    Route::get('/beban', [BebanController::class, 'index'])->name('beban.index');
+    Route::get('/beban/{id}', [BebanController::class, 'show'])->name('beban.show');
+    Route::get('/beban/create', [BebanController::class, 'createbeban'])->name('beban.create');
+    Route::post('/beban/store', [BebanController::class, 'store'])->name('beban.store');
+    Route::resource('/kategori',KategoriController::class);
+
+    Route::get('/riwayatbeban',[RiwayatController::class, 'indexBeban'])->name('riwayatbeban');
+    
+    Route::get('/labarugi', [LabaRugiController::class, 'hitungLabaRugi'])->name('labarugi.index');
+    Route::get('/aruskas', [ArusKasController::class, 'index'])->name('aruskas.index');
+    Route::get('/pegawais/laporan', [SignupController::class, 'laporan'])->name('pegawais.laporan');
+    
+    Route::resource('/saldo', SaldoController::class);
+    
+});
+Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat.index');
     Route::put('/edit-profile', [ProfileController::class,'update'])->name('editProfile');
     Route::get('/produks/cetak',[ProdukController::class, 'cetak'])->name('produks.cetak');
     Route::get('/profileedit', [ProfileController::class,'profile'])->name('profileedit');
@@ -69,21 +92,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pendapatans', [PendapatanController::class, 'index'])->name('pendapatans');
     Route::post('/pendapatan/store', [PendapatanController::class, 'store'])->name('pendapatan.store');
-
-    Route::get('/beban', [BebanController::class, 'index'])->name('beban.index');
-    Route::get('/beban/{id}', [BebanController::class, 'show'])->name('beban.show');
-    Route::get('/beban/create', [BebanController::class, 'createbeban'])->name('beban.create');
-    Route::post('/beban/store', [BebanController::class, 'store'])->name('beban.store');
-    Route::resource('/kategori',KategoriController::class);
-
-    Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat.index');
-    Route::get('/riwayatbeban',[RiwayatController::class, 'indexBeban'])->name('riwayatbeban');
-
-    Route::get('/labarugi', [LabaRugiController::class, 'hitungLabaRugi'])->name('labarugi.index');
-    Route::get('/aruskas', [ArusKasController::class, 'index'])->name('aruskas.index');
-    Route::get('/pegawais/laporan', [SignupController::class, 'laporan'])->name('pegawais.laporan');
-
-    Route::resource('/saldo', SaldoController::class);
 });
 
 

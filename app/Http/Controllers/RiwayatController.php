@@ -11,7 +11,7 @@ class RiwayatController extends Controller
 {
     public function index(): View
     {
-        $pendapatan = Pendapatan::orderBy('created_at', 'desc')->get();
+        $pendapatan = Pendapatan::where('id_usaha', auth()->user()->id_usaha)->orderBy('created_at', 'desc')->get();
 
         return view('riwayat', [
             'pendapatan' => $pendapatan,
@@ -20,7 +20,7 @@ class RiwayatController extends Controller
 
     public function indexBeban(): View
     {
-        $beban = Beban::orderBy('created_at', 'desc')->get();
+        $beban = Beban::where('id_usaha', auth()->user()->id_usaha)->orderBy('created_at', 'desc')->get();
 
         return view('riwayatbeban', [
             'beban' => $beban,

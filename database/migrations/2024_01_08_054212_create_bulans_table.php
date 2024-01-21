@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('bulans', function (Blueprint $table) {
             $table->id();
+            $table->string('name'); // Example: January, February, etc.
+            $table->string('value'); // Example: 01, 02, etc.
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pegawais');
+        Schema::dropIfExists('bulans');
     }
 };

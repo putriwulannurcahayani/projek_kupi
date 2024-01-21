@@ -16,6 +16,18 @@
                     <p class="text-red">Tanggal tidak boleh lebih dari hari ini.</p>
                 @enderror
             </div>
+            <!-- Existing Code ... -->
+
+            <div class="mb-3">
+                <label for="nama">Nama Pembeli :</label><br>
+                <input type="text" placeholder="Nama Pembeli" class="form-control" required name="nama_pembeli" value="{{ old('nama_pembeli') }}">
+                @error('nama_pembeli')
+                    <p class="text-red">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Existing Code ... -->
+
             <div class="mb-3">
                 <label for="nama">Pilih Produk :</label><br>
                 <select name="id_produk" required class="form-control">

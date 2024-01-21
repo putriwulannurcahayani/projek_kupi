@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Usaha;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +16,8 @@ class ProfileController extends Controller
     {
         $nama = auth()->user()->nama;
         $email = auth()->user()->email;
-        $namaUsaha = auth()->user()->nama_usaha;
-        $alamat = auth()->user()->alamat;
+        $namaUsaha = auth()->user()->usaha->nama_usaha;
+        $alamat = auth()->user()->usaha->alamat;
         $noTelepon = auth()->user()->no_telepon;
         $role = auth()->user()->role->nama_role;
 
@@ -28,12 +29,13 @@ class ProfileController extends Controller
 
         $nama = auth()->user()->nama;
         $email = auth()->user()->email;
-        $namaUsaha = auth()->user()->nama_usaha;
-        $alamat = auth()->user()->alamat;
+        $namaUsaha = auth()->user()->usaha->nama_usaha;
+        $alamat = auth()->user()->usaha->alamat;
         $noTelepon = auth()->user()->no_telepon;
         $role = auth()->user()->role->nama_role;
 
         return view('user.index', compact('nama', 'email', 'namaUsaha', 'alamat', 'noTelepon', 'role'));
+        
     }
 
     public function update(Request $request)
@@ -43,9 +45,7 @@ class ProfileController extends Controller
         //   Validation Rules
         $rules = [
             'nama' => 'required|string',
-            'nama_usaha' => 'required|string',
             'email' => 'required|email',
-            'alamat' => 'required|string',
             'no_telepon' => 'required|string',
             'img_profile' => 'image|mimes:jpg,jpeg,png',
         ];
@@ -56,6 +56,15 @@ class ProfileController extends Controller
             // Proceed with storing the image if format is valid
             $profile = $request->file('img_profile')->store('images');
             $user->update(["img_profile" => $profile]);
+        }
+
+        $usaha = Usaha::where('id', auth()->user()->id_usaha);
+
+        if($request->nama_usaha || $request->alamat){
+            $usaha->update([
+                "nama_usaha" => $request->nama_usaha,
+                "alamat" => $request->alamat,
+            ]);
         }
 
         // Update user information

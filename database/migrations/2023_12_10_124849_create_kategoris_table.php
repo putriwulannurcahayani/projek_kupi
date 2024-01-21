@@ -11,8 +11,10 @@ return new class extends Migration
     {
         Schema::create('kategoris', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_usaha')->nullable(true);
             $table->string('nama');
             $table->timestamps();
+            $table->foreign('id_usaha')->references('id')->on('usaha')->onDelete('cascade');
         });
     }
 

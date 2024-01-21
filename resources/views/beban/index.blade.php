@@ -5,6 +5,20 @@
 @section('contents')
 
 <div class="container">
+    @if (session()->has('tambah'))
+    <div class="d-flex justify-content-end">
+      <div class="toast my-4 bg-primary" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+        <div class="toast-header bg-primary text-light justify-content-between">
+          <div class="toast-body text-ligth">
+            {{ session('tambah') }}
+          </div>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form action="{{ route('beban.store') }}" method="post">
@@ -40,14 +54,14 @@
 
 
                 <label for="jumlah">Jumlah :</label><br>
-                <input type="number" id="harga" name="jumlah" required class="form-control">
+                <input type="number" id="harga" name="jumlah" required class="form-control" min="0">
                 @error('harga')
                     <span class="error">{{ $message }}</span>
                 @enderror
 
 
                 <label for="harga">Harga:</label><br>
-                <input type="number" id="stok" name="harga" required class="form-control">
+                <input type="number" id="stok" name="harga" required class="form-control" min="0">
                 @error('stok')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -59,5 +73,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+    myToast.show();
+  });
+</script>
 @endsection

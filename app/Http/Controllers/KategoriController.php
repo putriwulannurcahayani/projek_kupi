@@ -33,13 +33,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        
         $validate = $request->validate([
             "nama" => "required"
         ]);
 
+        $validate['id_usaha'] = auth()->user()->id_usaha;
+
         Kategori::create($validate);
-        return redirect()->back();
+        return redirect()->route('beban.index')
+        ->with('tambah', 'Kategori berhasil ditambahkan');;
     
     }
 

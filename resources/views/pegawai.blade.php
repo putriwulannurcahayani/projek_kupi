@@ -43,14 +43,6 @@
             </div>
 
             <div class="form-group">
-                <label for="alamat">Alamat:</label>
-                <input type="text" id="alamat" name="alamat" class="form-control form-control-sm" placeholder="Alamat" required>
-                @error('alamat')
-                <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="form-group">
                 <label for="no_telepon">No Telepon:</label>
                 <input type="text" id="no_telepon" name="no_telepon" class="form-control form-control-sm" placeholder="No Telepon" required>
                 @error('no_telepon')

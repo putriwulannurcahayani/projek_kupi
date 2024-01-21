@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('pendapatans', function (Blueprint $table) {
             $table->id();
             $table->string('tanggal');
+            $table->unsignedBigInteger('id_usaha');
             $table->unsignedBigInteger('id_produk');
+            $table->string('nama_pembeli');
             $table->string('jumlah_produk');
             $table->integer('harga_produk');
             $table->integer('total');
@@ -22,6 +24,7 @@ return new class extends Migration
     
             // Define foreign key constraint
             $table->foreign('id_produk')->references('id')->on('produks')->onDelete('cascade');
+            $table->foreign('id_usaha')->references('id')->on('usaha')->onDelete('cascade');
         });
     }
     

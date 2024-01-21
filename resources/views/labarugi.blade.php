@@ -6,12 +6,33 @@
 
     <body>
         <div class="container mt-4">
-            <div class="row mb-5">
+            <div class="mt-3 col-4 my-3">
+                <form action=""method="GET">
+                    <label for="month">Pilih Bulan:</label>
+                    <div class="d-flex">
+                        <select class="form-control" id="month" name="month">
+                            @foreach($bulan as $bul)
+                                @if(request('month') == strtolower($bul['inggris']))
+                                    <option value="{{ strtolower($bul['inggris']) }}" selected>{{ $bul['indo'] }}</option>
+                                @else
+                                    <option value="{{ strtolower($bul['inggris']) }}">{{ $bul['indo'] }}</option>
+                                @endif
+                            @endforeach
+                        </select>  
+                        <button type="submit" class="btn btn-primary ml-3">Lihat </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row d-flex justify-content-center mb-5">
                 <div class="col-md-9">
                     <div class="card bg-light mb-6">
                         <div class="card-header text-center border">
                             <h5>TOKO {{ $namaUsaha }}</h5>
-                            <p>Tanggal: {{ \Carbon\Carbon::now()->format('d-m-y') }}</p>
+                            @if (request('month'))
+                            <p>{{ strtoupper(request('month')) }} {{ \Carbon\Carbon::now()->format('Y') }}</p>
+                            @else
+                            <p>{{  strtoupper(\Carbon\Carbon::now()->format('F Y')) }}</p>
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -28,12 +49,20 @@
                                     <h5 class="bg-primary text-light">Pengeluaran</h5>
                                     <div class="card-body">
                                         @foreach ($kategoris as $kategori)
-                                        <div class="d-flex justify-content-between">
-                                            <span>{{ $kategori->nama }}:</span>
-                                            <span>{{ $kategori->bebans->sum('harga') }}</span>
-                                        </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span>{{ $kategori->nama }}:</span>
+                                                <span>
+                                                {{
+                                                        $kategori->bebans
+                                                            // ->whereYear('created_at', $selectedDate->year)
+                                                            // ->whereMonth('created_at', $selectedDate->month)
+                                                            ->sum('harga');
+                                                        }}
+                                                </span>
+                                            </div>
                                         @endforeach
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -55,6 +84,7 @@
                                         </h5>
                                         <h5>{{ $labaRugi }}</h5>
                                     </div>
+                                 
                                 </div>
                             </div>
                         </div>  

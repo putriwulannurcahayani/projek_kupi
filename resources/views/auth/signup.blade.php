@@ -20,7 +20,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <form action="{{ route('register') }}" class="signup-form" method="POST">
+    <form action="{{ route('register') }}" class="signup-form" method="POST">
         @csrf
         <h2>Sign Up</h2>
         <h6>Selamat Datang Di Aplikasi KUPI</h6>

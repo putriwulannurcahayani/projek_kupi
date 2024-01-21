@@ -13,13 +13,13 @@ class signupController extends Controller
 {
 
     public function daftarPegawai() {
-        $daftarPegawai = User::where('id_role', 2)->get();
+        $daftarPegawai = User::where('id_usaha', auth()->user()->id_usaha)->where('id_role', 2)->get();
         // dd($daftarPegawai);
         return view('pegawai.tampilan',compact('daftarPegawai'));
     }
 
     public function print() {
-        $daftarPegawai = User::where('id_role', 2)->get();
+        $daftarPegawai = User::where('id_role', 2)->where('id_usaha', auth()->user()->id_usaha)->get();
         // dd($daftarPegawai);
         return view('pegawai.laporan',compact('daftarPegawai'));
     }
@@ -37,19 +37,17 @@ public function register(Request $request)
 {
     $validate = $request->validate([
         "nama" => "required",
-        "alamat" => "required",
         "no_telepon" => "required",
         "email" => "required|email|unique:users",
         "password" => "required",
     ]);
-
+    
+    $validate['id_usaha'] = auth()->user()->id_usaha;
     $validate["id_role"] = 2;   
-    $validate["nama_usaha"] = auth()->user()->nama_usaha;
-
-    // dd($validate["id_role"]);    
+    $validate["nama_usaha"] = auth()->user()->nama_usaha;    
 
     User::create($validate);
-    return redirect()->route("daftarPegawai")->with('successAddSekolah', "Sekolah Berhasil Register");
+    return redirect()->route("daftarPegawai")->with('successAddSekolah', "Akun Pegawai Berhasil Ditambah");
 }
 
 public function logout(Request $request)
@@ -69,7 +67,7 @@ public function destroy($id)
         $produk->delete();
 
         return redirect()->route('daftarPegawai')
-            ->with('success', 'Data Pegawai berhasil dihapus'); // Redirect ke halaman daftar produk dengan pesan sukses
+            ->with('hapus', 'Data Pegawai berhasil dihapus'); // Redirect ke halaman daftar produk dengan pesan sukses
     }
 }
     

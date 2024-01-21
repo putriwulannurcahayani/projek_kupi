@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Kategori;
 use App\Models\Role;
+use App\Models\Usaha;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -33,22 +34,25 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        Usaha::create([
+            "nama_usaha" => "Kue Kering Pandan",
+            "alamat" => "Jalan. abc"
+        ]);
+
         User::create([
             "id_role" => 1,
+            "id_usaha" => 1,
             "nama" => 'admin',
-            "nama_usaha" => 'kue kering',
             "email" => 'admin@gmail.com',
-            "alamat" =>'JL. Mawar No.10',
             "no_telepon" =>'081234567890',
             "password" =>'admin123',
         ]);
 
         User::create([
             "id_role" => 2,
+            "id_usaha" => 1,
             "nama" => 'pegawai',
-            "nama_usaha" => 'kue kering',
             "email" => 'pegawai@gmail.com',
-            "alamat" =>'JL. Melati No.10',
             "no_telepon" =>'081999999999',
             "password" =>'pegawai123',
         ]);

@@ -15,7 +15,7 @@ class PendapatanController extends Controller
 {
     public function index():View
     {
-        $products = Produk::all(); // Assuming you want to retrieve all products
+        $products = Produk::where('id_usaha', auth()->user()->id_usaha)->get(); // Assuming you want to retrieve all products
 
         return view('pendapatan', compact('products')); // Mengirimkan pendapatan ke dalam view
     }
@@ -44,13 +44,17 @@ class PendapatanController extends Controller
                     }
                 },
             ],
+            'nama_pembeli' => 'required|string|max:255', // Add this line
+    // Other fields and rules...
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
     
         $product = Produk::find($validatedData['id_produk']);
 
-        $validatedData['harga_produk'] = $product->harga;
+        $validatedData['id_usaha'] = auth()->user()->id_usaha;
         
+        $validatedData['harga_produk'] = $product->harga;
+
         $validatedData['total'] = $product->harga * $validatedData['jumlah_produk'];
     
         $stok = $product->stok - $validatedData['jumlah_produk'];

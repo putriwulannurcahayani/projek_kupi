@@ -11,7 +11,8 @@ class ProdukController extends Controller
 {
     public function index():View
     {
-        $produks = Produk::all(); // Mengambil semua produk dari database
+        $produks = Produk::where('id_usaha', auth()->user()->id_usaha)->get(); // Mengambil semua produk dari database
+        
         return view('produk/index', compact('produks')); // Mengirimkan produk ke dalam view
     }
 
@@ -50,8 +51,10 @@ class ProdukController extends Controller
             'stok' => 'required|numeric|min:1'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
+
+        $validatedData['id_usaha'] = auth()->user()->id_usaha;
         
-        $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))->first();
+        $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))->where('id_usaha', auth()->user()->id_usaha)->first();
 
         if ($existingProduk) {
             // Update the existing product's information if needed
@@ -99,7 +102,7 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         $produk->delete();
 
-        return redirect()->route('produks.index')
-            ->with('success', 'Produk berhasil dihapus'); // Redirect ke halaman daftar produk dengan pesan sukses
+        return redirect()->back()->with('destroy', 'Produk berhasil dihapus'); // Redirect ke halaman daftar produk dengan pesan sukses
     }
+    
 }

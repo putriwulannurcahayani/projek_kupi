@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('saldo');
             $table->text('description')->nullable(true); 
-            $table->unsignedBigInteger('user_id'); // Adding 'user_id' as a foreign key
+            $table->unsignedBigInteger('id_usaha'); // Adding 'user_id' as a foreign key
             $table->timestamps();
 
             // Defining foreign key constraint
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_usaha')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

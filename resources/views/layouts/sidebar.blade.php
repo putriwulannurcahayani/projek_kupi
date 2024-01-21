@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('landingPage')}}">
     <div class="sidebar-brand-icon rotate-n-30">
       {{-- <i class="fas fa-laugh-wink"></i> --}}
       <img src="{{ asset('images/kupi.png') }}" style="width: 50px; height: 50px;" />

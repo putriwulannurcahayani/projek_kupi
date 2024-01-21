@@ -3,7 +3,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Change from center to flex-start */
-  background: #1093B5;
+  background: #437edf;
 }
 
 .wrapper {
@@ -24,7 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Updated to flex-start */
-  background: #1093B5;
+  background: #437edf;
 }
 .wrapper {
   position: relative;
@@ -99,11 +99,11 @@ form h3{
   color: #fff;
   letter-spacing: 1px;
   border: none;
-  background: #1a10da;
+  background: #96DDEC;
   cursor: pointer;
 }
 .input-box.button input:hover{
-  background: #96DDEC;
+  background: rgb(18, 165, 194);
 }
 form .text h3{
  color: #333;

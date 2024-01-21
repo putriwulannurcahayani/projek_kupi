@@ -15,12 +15,44 @@
                 <p id="tanggal"></p>
             </div>
 
+          
+                
             <div class="box-container">
                 <div class="container">
                     <div class="mb-3">
+                                         
+                            @if (session()->has('destroy'))
+                            <div class="d-flex justify-content-end">
+                            <div class="toast my-4 bg-danger" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+                                <div class="toast-header bg-danger text-light justify-content-between">
+                                <div class="toast-body text-ligth">
+                                    {{ session('destroy') }}
+                                </div>
+                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                            @endif
+                            @if (session()->has('success'))
+                            <div class="d-flex justify-content-end">
+                            <div class="toast my-4 bg-primary" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+                                <div class="toast-header bg-primary text-light justify-content-between">
+                                <div class="toast-body text-ligth">
+                                    {{ session('success') }}
+                                </div>
+                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                            @endif
                         <a href="{{ route('produks.create') }}" class="btn btn-success mr-3" style="margin-top: 10px">Tambah +</a>
-                        <a href="{{ route('produks.laporan') }}" class="btn btn-warning" style="margin-top: 10px">Lihat Laporan </a>
+                        {{-- <a href="{{ route('produks.laporan') }}" class="btn btn-warning" style="margin-top: 10px">Lihat Laporan </a> --}}
                     </div>
+                    @if ($produks->isNotEmpty())
                     <table class="table table-striped">
                         <thead class="">
                             <tr>
@@ -43,6 +75,7 @@
                                         <form class="d-inline ml-3  " action="{{ route('produks.destroy', $produk->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
+                                            
                                             <button type="submit" class="btn btn-danger ">Hapus</button>
                                         </form>
                                     </td>
@@ -50,9 +83,17 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @else
+                    <h1 class="text-center text-primary">Tidak Ada Produk</h1>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+        myToast.show();
+      });
+    </script>
 @endsection

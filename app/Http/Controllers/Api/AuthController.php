@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Usaha;
 use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -40,21 +42,33 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        $validate = $request->validate([
+        $request->validate([
             "nama" => "required",
             "alamat" => "required",
             "nama_usaha" => "required",
-            "no_telepon" => "required",
+            "no_telepon" => "required|min:12|max:13",
             "email" => "required|email|unique:users",
             "password" => "required",
         ]);
     
-        $validate["id_role"] = 1;       
-        // dd($validate["id_role"]);    
+        try {
+            DB::transaction(function () use ($request) {
+                // Membuat usaha
+                $usaha = Usaha::create($request->only('nama_usaha', 'alamat'));
     
-        User::create($validate);
-        
-        return response()->json(['message' => 'Akun berhasil dibuat']);
+                // Membuat user
+                $userAttributes = $request->except('nama_usaha', 'alamat');
+                $userAttributes['id_role'] = 1;
+                $userAttributes['id_usaha'] = $usaha->id;
+    
+                User::create($userAttributes);
+            });
+    
+            return response()->json([ 'message' => 'Register berhasil']);
+        } catch (\Throwable $th) {
+            // throw $th;
+            return response()->json([ 'message' => 'Register gagal! coba lagi']);
+        }
     }
         public function logout(Request $request)
     {

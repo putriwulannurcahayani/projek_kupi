@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Beban;
 use App\Models\Kategori;
+use Illuminate\Support\Facades\Auth;
 
 class BebanController extends Controller
 {
@@ -14,11 +15,9 @@ class BebanController extends Controller
     { 
        
         // Get all categories and beban data
-        $kategoris = Kategori::all();
-        $bebans = Beban::orderBy('tanggal', 'desc')->get();
-
+        $kategoris = Kategori::where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)->get();
         // Render the view
-        return view('beban.index', compact('kategoris', 'bebans'));
+        return view('beban.index', compact('kategoris'));
 
     }
 
@@ -55,8 +54,10 @@ class BebanController extends Controller
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
 
+        $validatedData['id_usaha'] = auth()->user()->id_usaha;
+
         // Simpan data beban baru ke dalam database
-        beban::create($request->all());
+        beban::create($validatedData);
 
         return redirect()->route('riwayatbeban')
             ->with('success', 'pengeluaran berhasil ditambahkan'); // Redirect ke halaman detail beban dengan pesan sukses

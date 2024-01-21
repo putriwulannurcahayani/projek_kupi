@@ -27,7 +27,8 @@ class PengeluaranController extends Controller
             'harga' => 'required|numeric'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
-
+        
+        $validatedData['id_usaha'] = auth()->user()->id_usaha;
         // Simpan data beban baru ke dalam database
         beban::create($validatedData);
 

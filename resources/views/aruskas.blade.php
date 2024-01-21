@@ -5,69 +5,100 @@
 @section('contents')
 
 <body>
-    {{-- <label for="nama">Tanggal :</label><br> --}}
-    <div class="mb-3">
-        <input type="date" placeholder="Tanggal" readonly required name="tanggal" value="{{ old('tanggal', \Carbon\Carbon::now()->format('Y-m-d')) }}">
-        @error('tanggal')
-            <p class="text-red">Tanggal tidak boleh lebih dari hari ini.</p>
-        @enderror
+    <div class="container mt-4">
+        <div class="row d-flex justify-content-between align-items-end">
+            <div class="mt-3 col-4 my-3">
+                <form action="" method="GET">
+                    <label for="month">Pilih Bulan:</label>
+                    <div class="d-flex">
+                        <select class="form-control" id="month" name="month">
+                            @foreach($bulan as $bul)
+                                @if(request('month') == strtolower($bul['inggris']))
+                                    <option value="{{ strtolower($bul['inggris']) }}" selected>{{ $bul['indo'] }}</option>
+                                @else
+                                    <option value="{{ strtolower($bul['inggris']) }}">{{ $bul['indo'] }}</option>
+                                @endif
+                            @endforeach
+                        </select>  
+                        <button type="submit" class="btn btn-primary ml-3">Lihat </button>
+                    </div>
+                </form>
+            </div>
+            <div class="">
+                @if (request('month'))
+                            <p>{{ strtoupper(request('month')) }} {{ \Carbon\Carbon::now()->format('Y') }}</p>
+                            @else
+                            <p>{{  strtoupper(\Carbon\Carbon::now()->format('F Y')) }}</p>
+                            @endif
+            </div>
+        </div>
+    <div class="container mt-3">
+        <main>
+            <section class="aktivitas-operasional">
+                <h5 class="bg-primary text-light p-2">Aktivitas Operasional</h5>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="">Kas yang dikeluarkan:</th>
+                                    <th class="text-right">Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kategoris as $kategori)
+                                <tr>
+                                    <td>{{ $kategori->nama }}:</td>
+                                    <td class="text-right">{{ $kategori->bebans->sum('harga') }}</td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td><strong>Total:</strong></td>
+                                    <td class="text-right"><strong>{{ $kategoris->sum(function($kategori) { return
+                                            $kategori->bebans->sum('harga'); }) }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%;height: 2px; background-color: black; border-radius: 20px"></div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th >Kas yang diterima:</th>
+                                    <th class="text-right">Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Total Pendapatan</strong></td>
+                                    <td class="text-right"><strong>{{ $totalPendapatan }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="saldo">
+                <h5 class="ml-3 font-weight-bold">Saldo</h5>
+                <div class= "d-flex justify-content-between">
+                <p class= "bg-primary text-center text-light p-2 col-5 ml-3">Saldo Awal </p>
+                <div class="col-6" style="height: 40px; border: 1px solid #9ca3af; background-color: #f8fafc">
+                    <p class="text-center mt-2 text-dark">Rp. {{ $cekSaldo->saldo }} </p>
+                </div>
+                </div>
+                <div class= "d-flex justify-content-between">
+                    <p class= "bg-primary text-center text-light p-2 col-5 ml-3">Saldo Akhir </p>
+                    <div class="col-6" style="height: 40px; border: 1px solid #9ca3af; background-color: #f8fafc">
+                        <p class="text-center mt-2 text-dark">Rp. {{ $saldoAkhir }} </p>
+                    </div>
+                    </div>
+            </section>
+        </main>
     </div>
-    
-    <main>
-        <section class="aktivitas-operasional">
-            <h5 class="bg-primary text-light"> Aktivitas Operasional</h5>
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="2">Kas yang dikeluarkan:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- <td colspan="2"> <!-- Added missing td tags --> --}}
-                        {{-- <div class="card-body"> --}}
-                            @foreach ($kategoris as $kategori)
-                            <tr>
-                                <td>{{ $kategori->nama }}:</td>
-                                <td>{{ $kategori->bebans->sum('harga') }}</td>
-                            </tr>
-                        @endforeach
-                        <tr>
-                            <td><strong>Total:</strong></td>
-                            <td><strong>{{ $kategoris->sum(function($kategori) { return $kategori->bebans->sum('harga'); }) }}</strong></td>
-                        </tr>
-                        
-                        {{-- </div> --}}
-                        {{-- </td> --}}
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="2">Kas yang diterima:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr> <!-- Added missing tr tag -->
-                        <td colspan="2"> <!-- Added missing td tags -->
-                            <div class="total-pendapatan d-flex justify-content-between">
-                            <tr>
-                                <td><strong>Total Pendapatan</strong></td>
-                                <td><strong>{{ $totalPendapatan }}</strong></td>
-                            </tr>    
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
-        </section>
-
-        <section class="saldo">
-            <h2>Saldo</h2>
-            <p>Saldo Awal : {{ !$cekSaldo ? 0 : $cekSaldo->saldo }}</p>
-            <p>Saldo Akhir: Rp. {{ $labaRugi }} </p>
-        </section>
-    </main>
 </body>
 @endsection

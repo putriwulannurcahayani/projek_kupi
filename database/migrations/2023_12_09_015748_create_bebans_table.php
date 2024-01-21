@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('bebans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_usaha');
             $table->string('tanggal');
             $table->string('nama');
             $table->integer('jumlah');
             $table->integer("harga");
             $table->timestamps();
 
+            $table->foreign('id_usaha')->references('id')->on('usaha')->onDelete('cascade');
         });
     }
 

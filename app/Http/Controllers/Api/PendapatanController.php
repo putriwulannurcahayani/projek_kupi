@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pendapatan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PendapatanController extends Controller
 {
@@ -18,40 +19,48 @@ class PendapatanController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data yang diterima dari formulir
-        $validatedData = $request->validate([
-            'tanggal' => 'required',
-            'id_produk' => 'required|exists:produks,id', // Make sure the product exists
-            'jumlah_produk' => [
-                'required',
-                'numeric',
-                'min:1',
-                function ($attribute, $value, $fail) use ($request) {
-                    // Custom validation rule to check if the quantity is greater than the available stock
-                    $product = Produk::find($request->id_produk);
-                    if ($product && $value > $product->stok) {
-                        $fail('Jumlah Produk Melebihi Stok Yang Tersedia');
-                    }
-                },
-            ],
-            // Sesuaikan validasi dengan kebutuhan Anda
-        ]);
-    
-        $product = Produk::find($validatedData['id_produk']);
-    
-        $validatedData['total'] = $product->harga * $validatedData['jumlah_produk'];
-    
-        $stok = $product->stok - $validatedData['jumlah_produk'];
-    
-        $product->update([
-            'stok' => $stok
-        ]);
-    
-        // Simpan data pendapatan baru ke dalam database
-        Pendapatan::create($validatedData);
-    
-        // event(new KurangiStokProduk($produk, $jumlah_produk));
-    
-        return response()->json(['message'=>'Pendapatan Berhasil Ditambah']); // Redirect ke halaman detail pendapatan dengan pesan sukses
+        try {
+            DB::beginTransaction();
+
+            $validatedData = $request->validate([
+                'tanggal' => 'required',
+                'nama_pembeli' => 'required|string|max:255',
+                'id_produk' => 'required|exists:produks,id',
+                'jumlah_produk' => [
+                    'required',
+                    'numeric',
+                    'min:1',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $product = Produk::find($request->id_produk);
+                        if ($product && $value > $product->stok) {
+                            $fail('Jumlah Produk Melebihi Stok Yang Tersedia');
+                        }
+                    },
+                ],
+                // Add other validation rules as needed
+            ]);
+
+            $user = auth()->user();
+
+            $validatedData['id_usaha'] = $user->id_usaha;
+
+            $product = Produk::findOrFail($validatedData['id_produk']);
+
+            $validatedData['total'] = $product->harga * $validatedData['jumlah_produk'];
+            $validatedData['harga_produk'] = $product->harga;
+
+            $newStok = $product->stok - $validatedData['jumlah_produk'];
+
+            $product->update(['stok' => $newStok]);
+
+            Pendapatan::create($validatedData);
+
+            DB::commit();
+
+            return response()->json(['message' => 'Pendapatan Berhasil Ditambah']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return response()->json(['message' => 'Pendapatan Gagal Ditambah', 'error' => $th->getMessage()],400);
+        }
     }
 }

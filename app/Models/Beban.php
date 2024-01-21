@@ -10,7 +10,7 @@ class Beban extends Model
     protected $table = 'bebans';
 
     protected $fillable = [
-        'tanggal', 'nama','kategori', 'jumlah', 'harga','id_kategori'
+        'tanggal', 'nama','kategori', 'jumlah', 'harga','id_kategori','id_usaha'
         // Kolom lain yang ingin diisi secara massal
     ];
 

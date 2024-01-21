@@ -6,29 +6,101 @@ use Illuminate\Http\Request;
 use App\Models\Beban;
 use App\Models\Kategori;
 use App\Models\Pendapatan;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LabaRugiController extends Controller
 {
     public function hitungLabaRugi()
-    {
-        $namaUsaha = strtoupper(Auth::user()->nama_usaha);
-        // Menghitung total pendapatan
-        $totalPendapatan = Pendapatan::sum('total');
-        // $totalPendapatan = DB::table('pendapatans')->sum('total');
-
-        // Menghitung total beban
-        $totalBeban = Beban::sum('harga');
-        // Menggunakan query builder Laravel
-        $totalBeban = DB::table('bebans')->sum('harga');
-
-        // Menghitung laba rugi
-        $labaRugi = $totalPendapatan - $totalBeban;
-
-        $kategoris = Kategori::all();
-
-
-        return view('labarugi', compact('namaUsaha','totalPendapatan', 'totalBeban', 'labaRugi','kategoris'));
+{
+    Carbon::setLocale('id');    
+    $namaUsaha = strtoupper(Auth::user()->usaha->nama_usaha);
+    $selectedMonth = request('month');
+    
+    // Validate the selected month to avoid potential issues
+    try {
+        $selectedDate = Carbon::parse($selectedMonth);
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Invalid date format.');
     }
+    
+    // Menghitung total pendapatan
+    $totalPendapatan = Pendapatan::where('id_usaha', Auth::user()->usaha->id)
+        ->whereYear('created_at', $selectedDate->year)
+        ->whereMonth('created_at', $selectedDate->month)
+        ->sum('total');
+    
+    // Menghitung total beban
+    $totalBeban = Beban::where('id_usaha', Auth::user()->usaha->id)
+        ->whereYear('created_at', $selectedDate->year)
+        ->whereMonth('created_at', $selectedDate->month)
+        ->sum('harga');
+    
+    // Menghitung laba rugi
+    $labaRugi = $totalPendapatan - $totalBeban;
+
+    $kategoris = Kategori::with(['bebans' => function ($query) use ($selectedDate) {
+        $query->where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)
+            ->whereYear('created_at', $selectedDate->year)
+            ->whereMonth('created_at', $selectedDate->month);
+    }])->where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)->get();
+
+    $bulan = [
+        [
+            'indo' => "Januari",
+            'inggris' => "January"
+        ],
+        [
+            'indo' => "Februari",
+            'inggris' => "February"
+        ],
+        [
+            'indo' => "Maret",
+            'inggris' => "March"
+        ],    
+        [
+            'indo' => "April",
+            'inggris' => "April"
+        ],
+        [
+            'indo' => "Mei",
+            'inggris' => "May"
+        ], 
+        [
+            'indo' => "Juni",
+            'inggris' => "June"
+        ],    
+        [
+            'indo' => "Juli",
+            'inggris' => "July"
+        ],
+        [
+            'indo' => "Agustus",
+            'inggris' => "August"
+        ],    
+        [
+            'indo' => "September",
+            'inggris' => "September"
+        ],    
+        [
+            'indo' => "Oktober",
+            'inggris' => "October"
+        ],    
+        [
+            'indo' => "November",
+            'inggris' => "November"
+        ],    
+        [
+            'indo' => "Desember",
+            'inggris' => "December"
+        ],    
+        ];
+
+    return view('labarugi', compact('selectedDate', 'namaUsaha', 'totalPendapatan', 'totalBeban', 'labaRugi', 'kategoris', 'bulan'));
 }
+
+    
+    
+}
+ 

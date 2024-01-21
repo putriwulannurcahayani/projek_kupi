@@ -30,13 +30,20 @@
                 </div>              
 
                 <div class="mb-3">
-                    <label for="nama_usaha" class="form-label">Nama Usaha:</label>
-                    <input type="text" id="nama_usaha" value="{{ $namaUsaha }}" placeholder="Nama Usaha" name="nama_usaha" class="form-control">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" id="email" value="{{ $email }}" placeholder="Email" name="email" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="text" id="email" value="{{ $email }}" placeholder="Email" name="email" class="form-control">
+                    <label for="no_telepon" class="form-label">No Telepon:</label>
+                    <input type="text" id="no_telepon" value="{{ $noTelepon }}" placeholder="No Telepon" name="no_telepon" pattern="[0-9]{12,13}" title="Please enter between 12 and 13 digits" class="form-control">
+                </div>
+
+                @if (auth()->user()->id_role == 1)
+                
+                <div class="mb-3">
+                    <label for="nama_usaha" class="form-label">Nama Usaha:</label>
+                    <input type="text" id="nama_usaha" value="{{ $namaUsaha }}" placeholder="Nama Usaha" name="nama_usaha" class="form-control">
                 </div>
 
                 <div class="mb-3">
@@ -44,10 +51,7 @@
                     <input type="text" id="alamat" value="{{ $alamat }}" placeholder="Alamat" name="alamat" class="form-control">
                 </div>
 
-                <div class="mb-3">
-                    <label for="no_telepon" class="form-label">No Telepon:</label>
-                    <input type="text" id="no_telepon" value="{{ $noTelepon }}" placeholder="No Telepon" name="no_telepon" pattern="[0-9]{12,13}" title="Please enter between 12 and 13 digits" class="form-control">
-                </div>
+                @endif
 
                 <div class="mb-3">
                     <label for="role" class="form-label">Role:</label>
