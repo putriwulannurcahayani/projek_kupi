@@ -41,7 +41,8 @@ class LabaRugiController extends Controller
     $labaRugi = $totalPendapatan - $totalBeban;
 
     $kategoris = Kategori::with(['bebans' => function ($query) use ($selectedDate) {
-        $query->where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)
+        $query
+        ->where('id_usaha', Auth::user()->usaha->id)
             ->whereYear('created_at', $selectedDate->year)
             ->whereMonth('created_at', $selectedDate->month);
     }])->where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)->get();

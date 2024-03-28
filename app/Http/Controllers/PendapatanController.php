@@ -44,7 +44,7 @@ class PendapatanController extends Controller
                     }
                 },
             ],
-            'nama_pembeli' => 'required|string|max:255', // Add this line
+            'nama_pembeli' => 'required|string|max:255', 
     // Other fields and rules...
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);

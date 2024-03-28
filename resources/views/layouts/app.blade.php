@@ -9,6 +9,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+    <!-- Favicons -->
+    <link href="images/kupi.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
   <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto);
 

@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="images/kupi.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -45,7 +45,7 @@
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto"><a href="index.html">KUPI</a></h1>
-      <img src="{{ asset('images/kupi.png') }}" style="width: 60px; height: 60px; margin-right: 650px;" />
+      <img src="{{ asset('images/kupi.png') }}" style="height: 60px; margin-right: 820px;" />
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -66,7 +66,7 @@
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
           <h1>Solusi Terbaik Untuk Masalah Keuangan</h1>
-          <h2>Manajemen Keungan Untuk Usaha Anda</h2>
+          <h2>Manajemen Keuangan Untuk Usaha Anda</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="{{route('login')}}" class="btn-get-started scrollto">Get Started</a>
             <a href="{{route('register')}}" class="btn-get-started scrollto"><span>Sign Up</span></a>

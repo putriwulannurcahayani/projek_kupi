@@ -33,9 +33,8 @@ class SaldoController extends Controller
         ]);
 
         $validatedData['id_usaha'] = auth()->user()->id_usaha;
-
         // dd($validatedData);
-        Saldo::create($validatedData);
+            Saldo::create($validatedData);
         return redirect()->route('dashboard')->with('succeess', "Berhasil Tambah Modal Awal");
     }
 

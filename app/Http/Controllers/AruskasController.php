@@ -28,6 +28,7 @@ class ArusKasController extends Controller
         ->whereYear('created_at', $selectedDate->year)
         ->whereMonth('created_at', $selectedDate->month)
         ->first();
+        
         if (!$cekSaldo) {
             $saldoAwal = 0; // Atur nilai saldo awal sesuai kebutuhan
             $cekSaldo = new Saldo([
@@ -41,7 +42,8 @@ class ArusKasController extends Controller
 
         // $arusses = ArusKasControllers::all();
         $kategoris = Kategori::with(['bebans' => function ($query) use ($selectedDate) {
-            $query->where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)
+            $query
+            ->where('id_usaha', Auth::user()->usaha->id)
             ->whereYear('created_at', $selectedDate->year)
             ->whereMonth('created_at', $selectedDate->month);
         }])->where('id_usaha', Auth::user()->usaha->id)->orWhere('id_usaha', null)->get();
