@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\BebanController;
+use App\Http\Controllers\jenisBarang;
+use App\Http\Controllers\jenisBarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LabaRugiController;
 use App\Http\Controllers\RegisterController;
@@ -89,7 +91,10 @@ Route::get('/riwayat',[RiwayatController::class, 'index'])->name('riwayat.index'
     Route::post('/produks/store', [ProdukController::class, 'store'])->name('produks.store');
     Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
-
+    Route::resource('/jenisBarang',jenisBarangController::class);
+    Route::post('/jenisbarang/store', [JenisBarangController::class, 'store'])->name('jenisbarangs.store');
+    Route::get('/jenisbarang', [JenisBarangController::class, 'index'])->name('jenisbarang.index');
+    
     Route::get('/pendapatans', [PendapatanController::class, 'index'])->name('pendapatans');
     Route::post('/pendapatan/store', [PendapatanController::class, 'store'])->name('pendapatan.store');
 });

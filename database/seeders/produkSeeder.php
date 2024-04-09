@@ -13,9 +13,11 @@ class produkSeeder extends Seeder
     public function run(): void
     {
         Produk::create([
-            "kode_produk" => "",
-            "nama_produk" => "",
-            "stok" => "",
+            "kode_produk" => "K001",
+            "nama_produk" => "Nama Produk 1",
+            "id_jenis_barang" => 1,
+            "harga" => 10000, // Contoh harga
+            "stok" => 10,
         ]);
     }
 }

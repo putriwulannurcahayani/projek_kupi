@@ -10,7 +10,7 @@ class Produk extends Model
     protected $table = 'produks';
 
     protected $fillable = [
-        'id_usaha', 'kode_produk', 'nama_produk', 'harga', 'stok'
+        'id_usaha', 'kode_produk', 'nama_produk','id_jenis_barang', 'harga', 'stok'
         // Kolom lain yang ingin diisi secara massal
     ];
 
@@ -18,5 +18,9 @@ class Produk extends Model
     public function orders()
     {
         return $this->hasMany(Pendapatan::class);
+    }
+    public function jenisBarang()
+    {
+        return $this->belongsTo(jenisBarang::class, 'id_jenis_barang','id');
     }
 }

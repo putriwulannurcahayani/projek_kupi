@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jenisBarang;
 use App\Models\Produk;
+use App\Models\Size;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
     public function index():View
     {
         $produks = Produk::where('id_usaha', auth()->user()->id_usaha)->get(); // Mengambil semua produk dari database
-        
-        return view('produk/index', compact('produks')); // Mengirimkan produk ke dalam view
+        $jenis_barangs = jenisBarang::where('id_usaha', Auth::user()->usaha->id)
+            ->orWhere('id_usaha', null)
+            ->get();
+        return view('produk/index', compact('produks','jenis_barangs')); // Mengirimkan produk ke dalam view
     }
 
     public function show($id): View
@@ -37,8 +42,15 @@ class ProdukController extends Controller
 
     public function createproduk()
     {
+        $jenis_barangs = jenisBarang::where('id_usaha', Auth::user()->usaha->id)
+        ->orWhere('id_usaha', null)
+        ->get();
+
+        $sizes = Size::where('id_usaha', Auth::user()->usaha->id)
+        ->orWhere('id_usaha', null)
+        ->get();
         // Logika untuk menampilkan formulir pembuatan produk
-        return view('produk.create'); // Gantilah 'produk.create' dengan nama view yang sesuai
+        return view('produk.create', compact('jenis_barangs', 'size')); // Gantilah 'produk.create' dengan nama view yang sesuai
     }
 
     public function store(Request $request): RedirectResponse
@@ -47,7 +59,8 @@ class ProdukController extends Controller
         $validatedData = $request->validate([
             'kode_produk' => 'required',
             'nama_produk' => 'required',
-            'harga' => 'required|numeric',
+            'id_jenis_barang' => 'required',
+            'harga' => 'required|numeric|min:1',
             'stok' => 'required|numeric|min:1'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);
