@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\jenisBarang;
 use App\Models\Produk;
-use App\Models\Size;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -46,11 +45,8 @@ class ProdukController extends Controller
         ->orWhere('id_usaha', null)
         ->get();
 
-        $sizes = Size::where('id_usaha', Auth::user()->usaha->id)
-        ->orWhere('id_usaha', null)
-        ->get();
         // Logika untuk menampilkan formulir pembuatan produk
-        return view('produk.create', compact('jenis_barangs', 'size')); // Gantilah 'produk.create' dengan nama view yang sesuai
+        return view('produk.create', compact('jenis_barangs')); // Gantilah 'produk.create' dengan nama view yang sesuai
     }
 
     public function store(Request $request): RedirectResponse
@@ -60,6 +56,7 @@ class ProdukController extends Controller
             'kode_produk' => 'required',
             'nama_produk' => 'required',
             'id_jenis_barang' => 'required',
+            'ukuran' => 'required',
             'harga' => 'required|numeric|min:1',
             'stok' => 'required|numeric|min:1'
             // Sesuaikan validasi dengan kebutuhan Anda
@@ -67,7 +64,13 @@ class ProdukController extends Controller
 
         $validatedData['id_usaha'] = auth()->user()->id_usaha;
         
+        
         $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))->where('id_usaha', auth()->user()->id_usaha)->first();
+        // Periksa apakah produk dengan nama dan ukuran yang sama sudah ada
+        $existingProduk = Produk::where('nama_produk', $request->input('nama_produk'))
+        ->where('ukuran', $request->input('ukuran'))
+        ->where('id_usaha', auth()->user()->id_usaha)
+        ->first();
 
         if ($existingProduk) {
             // Update the existing product's information if needed
@@ -85,6 +88,7 @@ class ProdukController extends Controller
             return redirect()->route('produks.index')
                 ->with('success', 'Produk berhasil ditambahkan'); // Redirect ke halaman detail produk dengan pesan sukses
         }
+
     }
 
     public function edit($id):View
@@ -98,6 +102,7 @@ class ProdukController extends Controller
         // Validasi data yang diterima dari formulir
         $validatedData = $request->validate([
             'nama_produk' => 'required',
+            'ukuran' => 'required',
             'harga' => 'required|numeric',
            ]);
 

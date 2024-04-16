@@ -38,6 +38,14 @@
             </div>
 
             <div class="mb-3">
+                <label for="ukuran" class="form-label">Ukuran:</label>
+                <input type="text" id="ukuran" name="ukuran" class="form-control" required>
+                @error('ukuran')
+                    <span class="">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
                 <label for="harga" class="form-label">Harga:</label>
                 <input type="number" id="harga" name="harga" class="form-control" required>
                 @error('harga')

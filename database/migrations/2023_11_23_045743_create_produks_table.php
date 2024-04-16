@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usaha');
             $table->string('kode_produk');
             $table->string('nama_produk');
+            $table->String('ukuran');
             $table->String('harga');
             $table->integer('stok');
             $table->timestamps();

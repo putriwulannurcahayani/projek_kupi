@@ -49,6 +49,7 @@
                             </div>
                             </div>
                             @endif
+
                         <a href="{{ route('produks.create') }}" class="btn btn-success mr-3" style="margin-top: 10px">Tambah +</a>
                         {{-- <a href="{{ route('produks.laporan') }}" class="btn btn-warning" style="margin-top: 10px">Lihat Laporan </a> --}}
                     </div>
@@ -58,6 +59,8 @@
                             <tr>
                                 <th scope="col">Kode Produk</th>
                                 <th scope="col">Nama Produk</th>
+                                <th scope="col">Jenis Barang</th>
+                                <th scope="col">Ukuran</th>
                                 <th scope="col">Harga</th>
                                 <th scope="col">Stok</th>
                                 <th class="text-center" scope="col">Aksi</th>
@@ -68,6 +71,8 @@
                                 <tr>
                                     <td>{{ $produk->kode_produk }}</td>
                                     <td>{{ $produk->nama_produk }}</td>
+                                    <td>{{ $produk->jenis_barang }}</td>
+                                    <td>{{ $produk->ukuran }}</td>
                                     <td>{{ $produk->harga }}</td>
                                     <td>{{ $produk->stok }}</td>
                                     <td class="action-buttons d-flex justify-content-center">

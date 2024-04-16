@@ -16,6 +16,7 @@ class produkSeeder extends Seeder
             "kode_produk" => "K001",
             "nama_produk" => "Nama Produk 1",
             "id_jenis_barang" => 1,
+            "ukuran" => "10 gram",
             "harga" => 10000, // Contoh harga
             "stok" => 10,
         ]);
