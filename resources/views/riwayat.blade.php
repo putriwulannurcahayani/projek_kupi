@@ -41,6 +41,7 @@
                 <th>Tanggal Transaksi</th>
                 <th>Nama Pembeli</th>
                 <th>Nama Produk</th>
+                <th>Ukuran</th>
                 <th>Jumlah Produk</th>
                 <th>Harga</th>
                 <th>Total</th>
@@ -52,6 +53,7 @@
                 <td>{{ $p->tanggal }}</td>
                 <td>{{ $p->nama_pembeli }}</td>
                 <td>{{ $p->produk->nama_produk }}</td>
+                <td>{{ $p->produk->ukuran }}</td>
                 <td>{{ $p->jumlah_produk }}</td>
                 <td>{{ $p->harga_produk }}</td>
                 <td>{{ $p->total }}</td>

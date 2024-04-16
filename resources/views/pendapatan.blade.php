@@ -35,7 +35,7 @@
                     @foreach($products as $product)
                     @if($product->stok > 0)
                         <option value="{{ $product->id }}" {{ old('produk') == $product->id ? 'selected' : '' }}>
-                            {{ $product->nama_produk }}
+                            {{ $product->nama_produk }} {{ $product->ukuran}}
                         </option>
                     @endif
                     @endforeach

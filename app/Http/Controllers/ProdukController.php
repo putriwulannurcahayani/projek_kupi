@@ -14,10 +14,10 @@ class ProdukController extends Controller
     public function index():View
     {
         $produks = Produk::where('id_usaha', auth()->user()->id_usaha)->get(); // Mengambil semua produk dari database
-        $jenis_barangs = jenisBarang::where('id_usaha', Auth::user()->usaha->id)
+        $jenis = jenisBarang::where('id_usaha', Auth::user()->usaha->id)
             ->orWhere('id_usaha', null)
             ->get();
-        return view('produk/index', compact('produks','jenis_barangs')); // Mengirimkan produk ke dalam view
+        return view('produk/index', compact('produks','jenis')); // Mengirimkan produk ke dalam view
     }
 
     public function show($id): View
