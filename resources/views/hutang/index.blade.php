@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Produk')
+@section('title', 'Hutang Piutang')
 
 @section('contents')
 
@@ -50,50 +50,48 @@
                             </div>
                             @endif
 
-                        <a href="{{ route('produks.create') }}" class="btn btn-success mr-3" style="margin-top: 10px">Tambah +</a>
-                        {{-- <a href="{{ route('produks.laporan') }}" class="btn btn-warning" style="margin-top: 10px">Lihat Laporan </a> --}}
+                            @if (auth()->user()->role->nama_role == 'admin')
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a href="{{ route('hutang.index') }}" class="btn btn-primary">Hutang</a>  
+                                        <a href="{{ route('piutang.index') }}" class="btn btn-secondary">Piutang</a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('hutang.create') }}" class="btn btn-success">Tambah</a>
+                                        <a href="" class="btn btn-primary">Bayar</a>
+                                    </div>
+                                </div>
+                            @endif
+
                     </div>
-                    @if ($produks->isNotEmpty())
+                   
                     <table class="table table-striped">
                         <thead class="">
                             <tr>
-                                <th scope="col">Kode Produk</th>
-                                <th scope="col">Nama Produk</th>
-                                <th scope="col">Jenis Barang</th>
-                                <th scope="col">Ukuran</th>
-                                <th scope="col">Harga</th>
-                                <th scope="col">Stok</th>
-                                <th class="text-center" scope="col">Aksi</th>
+                                <th scope="col">Tanggal Peminjaman</th>
+                                <th scope="col">Tanggal Jatuh Tempo</th>
+                                <th scope="col">Nama Pemberi Pinjaman</th>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Jumlah Cicilan</th>
+                                <th scope="col">Sisa Hutang</th>
+                                <th class="text-center" scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($produks as $produk)
+                            @foreach($hutangs as $hutang)
                                 <tr>
                                     
-                                    <td>{{ $produk->kode_produk }}</td>
-                                    <td>{{ $produk->nama_produk }}</td>
-                                    @foreach($jenis as $dataJenis)
-                                    <td>{{ $dataJenis->nama}}</td>
-                                    @endforeach
-                                    <td>{{ $produk->ukuran }}</td>
-                                    <td>{{ $produk->harga }}</td>
-                                    <td>{{ $produk->stok }}</td>
+                                    <td>{{ $hutang->tanggal_pinjaman}}</td>
+                                    <td>{{ $hutang->tanggal_jatuh_tempo }}</td>
+                                    <td>{{ $hutang->nama }}</td>
+                                    <td>{{ $hutang->jumlah_hutang }}</td>
+                                    <td>{{ $hutang->jumlah_cicilan }}</td>
                                     <td class="action-buttons d-flex justify-content-center">
-                                        <a href="{{ route('produks.edit', $produk->id) }}" class="btn btn-primary">Edit</a>
-                                        <form class="d-inline ml-3  " action="{{ route('produks.destroy', $produk->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            
-                                            <button type="submit" class="btn btn-danger ">Hapus</button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    @else
-                    <h3 class="text-center text-secondary">Tidak Ada Produk</h3>
-                    @endif
                 </div>
             </div>
         </div>

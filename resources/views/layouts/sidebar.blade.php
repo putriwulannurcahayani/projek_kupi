@@ -56,6 +56,12 @@
       <span>Arus Kas</span></a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('hutang.index') }}">
+      <i class="fas fa-arrow-down"></i>
+      <span>Hutang Piutang</span></a>
+</li>
+
 
 <li class="nav-item">
   <a class="nav-link" href="{{ route('daftarPegawai') }}">

@@ -1,0 +1,74 @@
+@extends('layouts.app')
+
+@section('title', 'Piutang')
+
+@section('contents')
+
+<div class="container">
+  @if (session()->has('tambah'))
+    <div class="d-flex justify-content-end">
+      <div class="toast my-4 bg-primary" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="15000">
+        <div class="toast-header bg-primary text-light justify-content-between">
+          <div class="toast-body text-ligth">
+            {{ session('tambah') }}
+          </div>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  @endif
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="{{ route('piutang.store') }}" method="post">
+        @csrf
+        <div>
+          <label for="tanggal_pinjaman">Tanggal Pinjaman :</label><br>
+          <input type="date" placeholder="Tanggal Pinjaman" required name="tanggal_pinjaman" value="{{ old('tanggal_pinjaman') }}" max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+          @error('tanggal_pinjaman')
+            <p class="text-red">Tanggal pinjaman tidak boleh lebih dari hari ini.</p>
+          @enderror
+        </div>
+
+        <div>
+          <label for="tanggal_jatuh_tempo">Tanggal Jatuh Tempo :</label><br>
+          <input type="date" placeholder="Tanggal Jatuh Tempo" required name="tanggal_jatuh_tempo" value="{{ old('tanggal_jatuh_tempo') }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+          @error('tanggal_jatuh_tempo')
+            <p class="text-red">Tanggal jatuh tempo harus setelah atau sama dengan hari ini.</p>
+          @enderror
+        </div>
+
+        <label for="nama">Nama Peminjam :</label><br>
+        <input type="text" id="nama" name="nama" required class="form-control" value="{{ old('nama') }}">
+        @error('nama')
+          <span class="error">{{ $message }}</span>
+        @enderror
+
+        <label for="jumlah_piutang">Nominal :</label><br>
+        <input type="number" id="jumlah_piutang" name="jumlah_piutang" required class="form-control" min="0" value="{{ old('jumlah_piutang') }}">
+        @error('jumlah_piutang')
+          <span class="error">{{ $message }}</span>
+        @enderror
+
+        <label for="jumlah_cicilan">Jumlah Cicilan :</label><br>
+        <input type="number" id="jumlah_cicilan" name="jumlah_cicilan" required class="form-control" min="0" value="{{ old('jumlah_cicilan') }}">
+        @error('jumlah_cicilan')
+          <span class="error">{{ $message }}</span>
+        @enderror
+
+        <div class="mt-3" style="text-align: left;">
+          <input type="submit" class="btn btn-primary" value="Tambah Piutang">
+          <a href="{{ route('piutang.index') }}" class="btn btn-danger">Batal</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+    myToast.show();
+  });
+</script>
+@endsection
