@@ -19,7 +19,7 @@ class Produk extends Model
     {
         return $this->hasMany(Pendapatan::class);
     }
-    public function jenisBarang()
+    public function jenis_barang()
     {
         return $this->belongsTo(jenisBarang::class, 'id_jenis_barang','id');
     }

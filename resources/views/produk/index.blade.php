@@ -72,9 +72,11 @@
                                     
                                     <td>{{ $produk->kode_produk }}</td>
                                     <td>{{ $produk->nama_produk }}</td>
-                                    @foreach($jenis as $dataJenis)
-                                    <td>{{ $dataJenis->nama}}</td>
-                                    @endforeach
+                                    <td>
+                                        
+                                        {{ $produk->jenis_barang->nama}}
+                                        
+                                    </td>
                                     <td>{{ $produk->ukuran }}</td>
                                     <td>{{ $produk->harga }}</td>
                                     <td>{{ $produk->stok }}</td>
