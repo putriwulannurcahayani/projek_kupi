@@ -49,7 +49,7 @@ class BebanController extends Controller
             'tanggal' => 'required',
             'nama' => 'required',
             'id_kategori' => 'required',
-            'jumlah' => 'required|numeric|min:1',
+            'jumlah' => 'required',
             'harga' => 'required|numeric'
             // Sesuaikan validasi dengan kebutuhan Anda
         ]);

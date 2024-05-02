@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usaha');
             $table->string('tanggal');
             $table->string('nama');
-            $table->integer('jumlah');
+            $table->string('jumlah');
             $table->integer("harga");
             $table->timestamps();
 

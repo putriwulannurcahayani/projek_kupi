@@ -54,7 +54,7 @@
 
 
                 <label for="jumlah">Jumlah :</label><br>
-                <input type="number" id="harga" name="jumlah" required class="form-control" min="0">
+                <input type="text" id="harga" name="jumlah" required class="form-control" required>
                 @error('harga')
                     <span class="error">{{ $message }}</span>
                 @enderror

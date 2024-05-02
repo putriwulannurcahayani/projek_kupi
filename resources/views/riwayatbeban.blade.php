@@ -43,7 +43,7 @@
                 <th>Tanggal Transaksi</th>
                 <th>Kategori</th>
                 <th>Nama</th>
-                <th>jumlah</th>
+                <th>Jumlah</th>
                 <th>Harga</th>
             </tr>
         </thead>
